@@ -6,15 +6,27 @@ using Photon.Pun;
 public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab;
-    
+
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            int randomPointX = Random.Range(-10, 10);
-            int randomPointZ = Random.Range(-10, 10);
-            PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(randomPointX, 0, randomPointZ), Quaternion.identity);
+            PhotonNetwork.Instantiate(playerPrefab.name, SpawnManager.instance.spawnPoints[SpawnManager.instance.GetRandomNumber()].position, Quaternion.identity);
         }
     }
 

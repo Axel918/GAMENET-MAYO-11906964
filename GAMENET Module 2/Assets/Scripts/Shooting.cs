@@ -78,6 +78,7 @@ public class Shooting : MonoBehaviourPunCallbacks
 
     IEnumerator RespawnCountdown()
     {
+        GameObject respawn = GameObject.Find("Respawn Canvas");
         GameObject respawnText = GameObject.Find("Respawn Text");
         float respawnTime = 5.0f;
 
@@ -87,16 +88,16 @@ public class Shooting : MonoBehaviourPunCallbacks
             respawnTime--;
 
             transform.GetComponent<PlayerMovementController>().enabled = false;
+            respawn.GetComponent<Image>().color = new Color(0, 0, 0, 80);
             respawnText.GetComponent<Text>().text = "You are killed. Respawning in " + respawnTime.ToString(".00");
         }
 
         animator.SetBool("isDead", false);
+        respawn.GetComponent<Image>().color = new Color(0,0,0,0);
         respawnText.GetComponent<Text>().text = "";
 
-        int randomPointX = Random.Range(-20, 20);
-        int randomPointZ = Random.Range(-20, 20);
-
-        this.transform.position = new Vector3(randomPointX, 0 , randomPointZ);
+        // Position to a random spawn point
+        this.transform.position = SpawnManager.instance.spawnPoints[SpawnManager.instance.GetRandomNumber()].position;
         transform.GetComponent<PlayerMovementController>().enabled = true;
 
         photonView.RPC("RegainHealth", RpcTarget.AllBuffered);
