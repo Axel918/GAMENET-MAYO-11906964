@@ -16,12 +16,18 @@ public class Shooting : MonoBehaviourPunCallbacks
 
     private Animator animator;
 
+    private GameObject scoreBoard;
+
+    private bool isAlive;
+
     // Start is called before the first frame update
     void Start()
     {
         health = startHealth;
         healthBar.fillAmount = health / startHealth;
         animator = this.GetComponent<Animator>();
+        scoreBoard = GameObject.Find("ScoreBoard");
+        isAlive = true;
     }
 
     // Update is called once per frame
@@ -53,9 +59,11 @@ public class Shooting : MonoBehaviourPunCallbacks
         this.health -= damage;
         this.healthBar.fillAmount = health / startHealth;
 
-        if (health <= 0)
+        if (health <= 0 && isAlive)
         {
             Die();
+            KillFeed.instance.AddKillFeedItem(info.Sender, info.photonView.Owner);
+            photonView.RPC("IsNotAlive", RpcTarget.AllBuffered, false);
             Debug.Log(info.Sender.NickName + " killed " + info.photonView.Owner.NickName);
         }
     }
@@ -100,6 +108,7 @@ public class Shooting : MonoBehaviourPunCallbacks
         this.transform.position = SpawnManager.instance.spawnPoints[SpawnManager.instance.GetRandomNumber()].position;
         transform.GetComponent<PlayerMovementController>().enabled = true;
 
+        photonView.RPC("IsNotAlive", RpcTarget.AllBuffered, true);
         photonView.RPC("RegainHealth", RpcTarget.AllBuffered);
     }
 
@@ -108,5 +117,11 @@ public class Shooting : MonoBehaviourPunCallbacks
     {
         health = 100;
         healthBar.fillAmount = health / startHealth;
+    }
+
+    [PunRPC]
+    public void IsNotAlive(bool value)
+    {
+        isAlive = value;
     }
 }
