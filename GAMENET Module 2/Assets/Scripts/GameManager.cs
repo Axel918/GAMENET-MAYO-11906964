@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     IEnumerator LeaveRoom()
     {
-        float returnTime = 6.0f;
+        float returnTime = 5.0f;
 
         while (returnTime > 0f)
         {
