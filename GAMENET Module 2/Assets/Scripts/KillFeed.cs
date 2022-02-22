@@ -23,6 +23,7 @@ public class KillFeed : MonoBehaviour
             instance = this;
         }
     }
+
     public void AddKillFeedItem(Player player, Player otherPlayer)
     {
         KillFeedItem item = Instantiate(killFeedItemPrefab, container).GetComponent<KillFeedItem>();

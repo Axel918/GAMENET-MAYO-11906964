@@ -67,6 +67,6 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
     public void UpdateKillCount(Player player)
     {
         scoreBoardItems[player].killCount += 1;
-        scoreBoardItems[player].Initialize(player);
+        scoreBoardItems[player].SetKillCount(player);
     }
 }
