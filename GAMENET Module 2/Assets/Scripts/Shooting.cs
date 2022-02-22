@@ -62,7 +62,9 @@ public class Shooting : MonoBehaviourPunCallbacks
         if (health <= 0 && isAlive)
         {
             Die();
+            ScoreBoard.instance.UpdateKillCount(info.Sender);
             KillFeed.instance.AddKillFeedItem(info.Sender, info.photonView.Owner);
+            GameManager.instance.playerVictor = info.Sender;
             photonView.RPC("IsNotAlive", RpcTarget.AllBuffered, false);
             Debug.Log(info.Sender.NickName + " killed " + info.photonView.Owner.NickName);
         }

@@ -63,4 +63,10 @@ public class ScoreBoard : MonoBehaviourPunCallbacks
         Destroy(scoreBoardItems[player].gameObject);
         scoreBoardItems.Remove(player);
     }
+
+    public void UpdateKillCount(Player player)
+    {
+        scoreBoardItems[player].killCount += 1;
+        scoreBoardItems[player].Initialize(player);
+    }
 }

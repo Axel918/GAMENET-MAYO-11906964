@@ -144,29 +144,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3144}
     - Class: 114
-      Script: {instanceID: 3196}
+      Script: {instanceID: 3192}
     - Class: 114
-      Script: {instanceID: 3240}
+      Script: {instanceID: 3198}
     - Class: 114
-      Script: {instanceID: 3548}
+      Script: {instanceID: 3242}
     - Class: 114
-      Script: {instanceID: 3632}
+      Script: {instanceID: 3550}
     - Class: 114
-      Script: {instanceID: 4068}
+      Script: {instanceID: 3634}
     - Class: 114
-      Script: {instanceID: 4308}
+      Script: {instanceID: 4070}
     - Class: 114
-      Script: {instanceID: 4596}
+      Script: {instanceID: 4310}
     - Class: 114
-      Script: {instanceID: 4664}
+      Script: {instanceID: 4598}
     - Class: 114
-      Script: {instanceID: 4678}
+      Script: {instanceID: 4666}
     - Class: 114
-      Script: {instanceID: 4748}
+      Script: {instanceID: 4680}
     - Class: 114
-      Script: {instanceID: 120566}
+      Script: {instanceID: 4750}
     - Class: 114
-      Script: {instanceID: 120576}
+      Script: {instanceID: 5014}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 121
@@ -291,49 +291,49 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3148}
     - Class: 114
-      Script: {instanceID: 3240}
+      Script: {instanceID: 3242}
     - Class: 114
-      Script: {instanceID: 3264}
+      Script: {instanceID: 3266}
     - Class: 114
-      Script: {instanceID: 3338}
+      Script: {instanceID: 3340}
     - Class: 114
-      Script: {instanceID: 3356}
+      Script: {instanceID: 3358}
     - Class: 114
-      Script: {instanceID: 3548}
+      Script: {instanceID: 3550}
     - Class: 114
-      Script: {instanceID: 3710}
+      Script: {instanceID: 3712}
     - Class: 114
-      Script: {instanceID: 4050}
+      Script: {instanceID: 4052}
     - Class: 114
-      Script: {instanceID: 4054}
+      Script: {instanceID: 4056}
     - Class: 114
-      Script: {instanceID: 4068}
+      Script: {instanceID: 4070}
     - Class: 114
-      Script: {instanceID: 4104}
+      Script: {instanceID: 4106}
     - Class: 114
-      Script: {instanceID: 4230}
+      Script: {instanceID: 4232}
     - Class: 114
-      Script: {instanceID: 4270}
+      Script: {instanceID: 4272}
     - Class: 114
-      Script: {instanceID: 4274}
+      Script: {instanceID: 4276}
     - Class: 114
-      Script: {instanceID: 4308}
+      Script: {instanceID: 4310}
     - Class: 114
-      Script: {instanceID: 4382}
+      Script: {instanceID: 4384}
     - Class: 114
-      Script: {instanceID: 4596}
+      Script: {instanceID: 4598}
     - Class: 114
-      Script: {instanceID: 4648}
-    - Class: 114
-      Script: {instanceID: 4678}
+      Script: {instanceID: 4650}
     - Class: 114
       Script: {instanceID: 4680}
     - Class: 114
-      Script: {instanceID: 4826}
+      Script: {instanceID: 4682}
     - Class: 114
-      Script: {instanceID: 5068}
+      Script: {instanceID: 4828}
     - Class: 114
-      Script: {instanceID: 5146}
+      Script: {instanceID: 5072}
+    - Class: 114
+      Script: {instanceID: 5150}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1223,6 +1223,12 @@ ScriptsOnlyBuild:
     className: ScreenSpaceAmbientObscurance
   - hash:
       serializedVersion: 2
+      Hash: 81b680499dfe9219f415f48a514c3248
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: KillFeed
+  - hash:
+      serializedVersion: 2
       Hash: ec9cfd716e8b048ce509c8dd26bd2705
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1469,7 +1475,7 @@ ScriptsOnlyBuild:
     className: FixedButton
   - hash:
       serializedVersion: 2
-      Hash: fd7df9301f1ba79a32a8b259dbbf1fc1
+      Hash: 16428b9db7a12e338b6179d34f220bf5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ScoreBoardItem
@@ -2057,7 +2063,7 @@ ScriptsOnlyBuild:
     className: DestroyAfterTimeParticle
   - hash:
       serializedVersion: 2
-      Hash: d1f07c9e64b7817e6271f80bb03de25f
+      Hash: 323be1d76ea2e3aac28c530940dfab42
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -2243,6 +2249,12 @@ ScriptsOnlyBuild:
     className: SignalEmitter
   - hash:
       serializedVersion: 2
+      Hash: 9c02146aec1788d6e551c15260b4387f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: KillFeedItem
+  - hash:
+      serializedVersion: 2
       Hash: c656dcc13ae391b68d594cc8f9c590b0
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit
@@ -2337,18 +2349,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp-firstpass.dll
     namespaceName: UnityStandardAssets.Utility
     className: FPSCounter
-  - hash:
-      serializedVersion: 2
-      Hash: 9c02146aec1788d6e551c15260b4387f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: KillFeedItem
-  - hash:
-      serializedVersion: 2
-      Hash: 81b680499dfe9219f415f48a514c3248
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: KillFeed
   platform: 13
   scenePathNames:
   - Assets/Scenes/LobbyScene.unity
