@@ -11,11 +11,11 @@ public enum ShootType
     LASER
 }
 
-public class Shooting : MonoBehaviour
+public class Shooting : MonoBehaviourPunCallbacks
 {
     public ShootType shootType;
     
-    public Camera camera;
+    public GameObject car;
 
     [Header("HP Variables")]
     public float startHealth = 100;
@@ -23,6 +23,10 @@ public class Shooting : MonoBehaviour
     public Image healthBar;
 
     private bool isAlive;
+
+    public GameObject machineGunEffectPrefab;
+    public Transform[] firePoints;
+    public GameObject[] bulletPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -35,26 +39,31 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.J))
+        if (photonView.IsMine)
         {
-            if (shootType == ShootType.MACHINE_GUN)
+            if (Input.GetKey(KeyCode.J) && shootType == ShootType.MACHINE_GUN)
             {
-                Debug.Log("Shoot");
-                //MachineGunFire();
+               //Debug.Log("Shoot");
+               MachineGunFire(); 
+            }
+            else if (Input.GetKeyDown(KeyCode.J) && shootType == ShootType.PROJECTILE)
+            {
+                ProjectileFire();
             }
         }
+        
         
     }
 
     public void MachineGunFire()
     {
         RaycastHit hit;
-        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f));
 
-        if (Physics.Raycast(ray, out hit, 200))
+        if (Physics.Raycast(car.transform.position, car.transform.forward, out hit, 200))
         {
             Debug.Log(hit.collider.gameObject.name);
-            //photonView.RPC("CreateHitEffects", RpcTarget.All, hit.point);
+            photonView.RPC("MachineGunEffects", RpcTarget.All, firePoints[0].position);
+            photonView.RPC("MachineGunEffects", RpcTarget.All, firePoints[1].position);
 
             if (hit.collider.gameObject.CompareTag("Player") && !hit.collider.gameObject.GetComponent<PhotonView>().IsMine)
             {
@@ -65,7 +74,29 @@ public class Shooting : MonoBehaviour
 
     public void ProjectileFire()
     {
+        RaycastHit hit;
+        Vector3 targetPoint = new Vector3();
 
+        if (Physics.Raycast(car.transform.position, car.transform.forward, out hit, 200))
+        {
+            targetPoint = hit.point;
+
+            
+        }
+
+        // Calculate direction
+        Vector3 direction = targetPoint - firePoints[0].position;
+
+        // Spawn prefab
+        GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab[0].name, firePoints[0].position, Quaternion.identity) as GameObject;
+
+        //bullet.transform.forward = direction.normalized;
+
+        // Add force
+        bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * 100f, ForceMode.Impulse);
+
+        // Destroy Bullet
+        Destroy(bullet, 2.0f);
     }
 
     public void LaserFire()
@@ -81,7 +112,29 @@ public class Shooting : MonoBehaviour
 
         if (health <= 0 && isAlive)
         {
-            
+            Death();
+            isAlive = false;
         }
     }
+
+    [PunRPC]
+    public void MachineGunEffects(Vector3 position)
+    {
+        GameObject hitEffectGameObject = Instantiate(machineGunEffectPrefab, position, Quaternion.identity);
+        hitEffectGameObject.transform.parent = gameObject.transform;
+        Destroy(hitEffectGameObject, 0.2f);
+    }
+
+    public void Death()
+    {
+        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            photonView.RPC("TakeDamage", RpcTarget.AllBuffered, 5);
+        }
+    } 
 }
