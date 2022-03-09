@@ -9,6 +9,9 @@ using ExitGames.Client.Photon;
 public class LapController : MonoBehaviourPunCallbacks
 {
     public List<GameObject> lapTriggers = new List<GameObject>();
+    
+    [SerializeField]
+    private GameObject[] laps;
 
     public enum RaiseEventsCode
     {
@@ -20,11 +23,13 @@ public class LapController : MonoBehaviourPunCallbacks
     private void OnEnable()
     {
         PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+        Debug.Log("Enabled");
     }
 
     private void OnDisable()
     {
         PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
+        Debug.Log("Disabled");
     }
 
     void OnEvent(EventData photonEvent)
@@ -61,21 +66,35 @@ public class LapController : MonoBehaviourPunCallbacks
         {
             lapTriggers.Add(go);
         }
+
+        laps = GameObject.FindGameObjectsWithTag("Laps");
     }
 
     private void OnTriggerEnter(Collider col)
     {
         if (lapTriggers.Contains(col.gameObject))
         {
-            int indexOfTrigger = lapTriggers.IndexOf(col.gameObject);
+            if (col.gameObject.tag == "FinishTrigger")
+            {
+                if (laps.Length <= 0)
+                {
+                    GameFinish();
+                }
+                else
+                {
+                    return;
+                }
+                
+            }
+            else if (col.gameObject.tag == "Laps")
+            {
+                int indexOfTrigger = lapTriggers.IndexOf(col.gameObject);
 
-            lapTriggers[indexOfTrigger].SetActive(false);
-        }
+                lapTriggers[indexOfTrigger].SetActive(false);
 
-        if (col.gameObject.tag == "FinishTrigger")
-        {
-            GameFinish();
-        }
+                laps = GameObject.FindGameObjectsWithTag("Laps");
+            }
+        }  
     }
 
     void GameFinish()
