@@ -340,7 +340,7 @@ BoxCollider:
   m_GameObject: {fileID: 2867463645204093948}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -443,7 +443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4082320120429715444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4.019}
+  m_LocalPosition: {x: 0, y: 0, z: 5.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1548854315493577878}
@@ -540,7 +540,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4175047757898617910}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -1071,7 +1071,8 @@ GameObject:
   - component: {fileID: 6911283349989140200}
   - component: {fileID: -1549923266237570625}
   - component: {fileID: -2570337636937456990}
-  - component: {fileID: 7212888275737259988}
+  - component: {fileID: 7554334633174364641}
+  - component: {fileID: 5979376851622037288}
   m_Layer: 0
   m_Name: GTR (DR)
   m_TagString: Player
@@ -1240,9 +1241,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7212888275737259988
+  m_Size: {x: 3.0713058, y: 2.5721846, z: 7.822223}
+  m_Center: {x: 0.066380024, y: 0.40411752, z: 0.10306001}
+--- !u!114 &7554334633174364641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1251,18 +1252,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 6155368835611645392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 473d957d1e5d67c4cacb9c90b6ed662d, type: 3}
+  m_Script: {fileID: 11500000, guid: 62fcee72b57732b4eae4f3364c64face, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootType: 1
-  car: {fileID: 5678681779275067839}
   startHealth: 100
   healthBar: {fileID: 2021790722596764802}
-  machineGunEffectPrefab: {fileID: 0}
-  firePoints:
-  - {fileID: 8676790565805053243}
-  bulletPrefab:
-  - {fileID: 394386318254828408, guid: 0c4417f278ba9aa48b528d644ed75f9e, type: 3}
+--- !u!114 &5979376851622037288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6155368835611645392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b533864ed248842944c76043993531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 8676790565805053243}
+  bulletPrefab: {fileID: 5026624520518706281, guid: 7d2000c2f24e8f642977b3d7d228912f, type: 3}
+  reloadTime: 0.5
 --- !u!1 &6518580106621254646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,7 +1470,7 @@ BoxCollider:
   m_GameObject: {fileID: 8713431646106263600}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

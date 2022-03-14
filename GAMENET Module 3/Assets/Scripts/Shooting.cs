@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-
+/*
 public enum ShootType
 {
     MACHINE_GUN,
@@ -74,29 +74,40 @@ public class Shooting : MonoBehaviourPunCallbacks
 
     public void ProjectileFire()
     {
-        RaycastHit hit;
+        /*RaycastHit hit;
         Vector3 targetPoint = new Vector3();
 
         if (Physics.Raycast(car.transform.position, car.transform.forward, out hit, 200))
         {
             targetPoint = hit.point;
-
-            
+            Debug.Log(hit.collider.gameObject.name);
+        }
+        else
+        {
+            Debug.Log("Out of distance");
+            return;
         }
 
         // Calculate direction
-        Vector3 direction = targetPoint - firePoints[0].position;
+        //Vector3 direction = targetPoint - firePoints[0].position;
 
+        photonView.RPC("ShootBullets", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    public void ShootBullets()
+    {
         // Spawn prefab
-        GameObject bullet = PhotonNetwork.Instantiate(bulletPrefab[0].name, firePoints[0].position, Quaternion.identity) as GameObject;
+        GameObject bullet = Instantiate(bulletPrefab[0], firePoints[0].position, Quaternion.identity);
 
-        //bullet.transform.forward = direction.normalized;
+        // Rotate Bullet forward
+        bullet.transform.forward = firePoints[0].forward;
 
         // Add force
-        bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * 100f, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().AddForce(firePoints[0].forward * 50f, ForceMode.Impulse);
 
         // Destroy Bullet
-        Destroy(bullet, 2.0f);
+        Destroy(bullet, 1.0f);
     }
 
     public void LaserFire()
@@ -129,12 +140,5 @@ public class Shooting : MonoBehaviourPunCallbacks
     {
         
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            photonView.RPC("TakeDamage", RpcTarget.AllBuffered, 5);
-        }
-    } 
 }
+*/

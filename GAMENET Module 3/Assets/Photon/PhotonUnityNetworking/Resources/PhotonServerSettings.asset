@@ -42,6 +42,8 @@ MonoBehaviour:
   - StartRace
   - TakeDamage
   - MachineGunEffects
+  - OnTriggerEnter
+  - ShootBullets
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

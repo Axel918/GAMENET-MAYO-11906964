@@ -125,7 +125,7 @@ BoxCollider:
   m_GameObject: {fileID: 537570115554399545}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -220,7 +220,7 @@ BoxCollider:
   m_GameObject: {fileID: 738371027009315875}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -315,7 +315,7 @@ BoxCollider:
   m_GameObject: {fileID: 1408944923136574913}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1234,7 +1234,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 8293265964425043090}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -1257,7 +1257,7 @@ GameObject:
   - component: {fileID: 5304089037821069116}
   - component: {fileID: -3460974903179348722}
   - component: {fileID: 7633759141632530091}
-  - component: {fileID: 3938867164526731116}
+  - component: {fileID: 8665342039487112315}
   m_Layer: 0
   m_Name: Red Sports (DR)
   m_TagString: Player
@@ -1426,9 +1426,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3938867164526731116
+  m_Size: {x: 3.4768348, y: 1.9412796, z: 7.80389}
+  m_Center: {x: -0.045867205, y: 0.26323715, z: -0.24861956}
+--- !u!114 &8665342039487112315
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1437,15 +1437,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8992870086580418911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 473d957d1e5d67c4cacb9c90b6ed662d, type: 3}
+  m_Script: {fileID: 11500000, guid: 62fcee72b57732b4eae4f3364c64face, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootType: 2
-  camera: {fileID: 8284635461452314840}
   startHealth: 100
-  healthBar: {fileID: 0}
-  machineGunEffectPrefab: {fileID: 0}
-  firePoints: []
+  healthBar: {fileID: 6067520919762606664}
 --- !u!1 &9063914062954373886
 GameObject:
   m_ObjectHideFlags: 0

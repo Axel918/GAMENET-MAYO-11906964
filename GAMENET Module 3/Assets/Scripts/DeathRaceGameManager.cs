@@ -12,7 +12,6 @@ public class DeathRaceGameManager : MonoBehaviour
     public Transform[] startingPositions;
     public Text timeText;
 
-
     private void Awake()
     {
         if (instance == null)
