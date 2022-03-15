@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class DeathRaceGameManager : MonoBehaviourPunCallbacks
 {
@@ -54,6 +55,7 @@ public class DeathRaceGameManager : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         //PhotonNetwork.LoadLevel("LobbyScene");
+        //PhotonNetwork.Disconnect();
         SceneManager.LoadScene("LobbyScene");
     }
 
@@ -64,6 +66,6 @@ public class DeathRaceGameManager : MonoBehaviourPunCallbacks
 
     public void OnQuitGameButtonClicked()
     {
-        LeaveRoom();
+        PhotonNetwork.LeaveRoom();
     }
 }

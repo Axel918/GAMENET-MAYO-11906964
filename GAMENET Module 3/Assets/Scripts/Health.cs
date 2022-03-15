@@ -7,7 +7,7 @@ using Photon.Pun;
 public class Health : MonoBehaviourPunCallbacks
 {
     [Header("HP Variables")]
-    public float startHealth = 100;
+    public float startHealth;
     private float health;
     public Image healthBar;
     private bool isAlive;
@@ -27,7 +27,7 @@ public class Health : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void TakeDamage(int damage, PhotonMessageInfo info)
+    public void TakeDamage(float damage, PhotonMessageInfo info)
     {
         this.health -= damage;
         this.healthBar.fillAmount = health / startHealth;

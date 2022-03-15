@@ -240,7 +240,6 @@ GameObject:
   - component: {fileID: 2027518944432904065}
   - component: {fileID: 1996178389661764642}
   - component: {fileID: -6411412907382495739}
-  - component: {fileID: 522592024354763860}
   - component: {fileID: 1841301178451414972}
   - component: {fileID: 6312797454247227520}
   - component: {fileID: 8038633542444115201}
@@ -388,20 +387,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 0}
   timeToStartRace: 5
---- !u!114 &522592024354763860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 946630733671837049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4a467b0551ba6846a087dd74aef59c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lapTriggers: []
-  laps: []
 --- !u!65 &1841301178451414972
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -446,7 +431,7 @@ MonoBehaviour:
   firePoints:
   - {fileID: 3943302608150566984}
   - {fileID: 5161604712532704299}
-  reloadTime: 0.5
+  reloadTime: 0.25
 --- !u!1 &1006365672669623967
 GameObject:
   m_ObjectHideFlags: 0
