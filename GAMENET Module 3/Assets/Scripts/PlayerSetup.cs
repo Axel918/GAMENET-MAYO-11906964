@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
 
@@ -10,6 +11,8 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private TextMeshProUGUI playerNameText;
+
+    public GameObject playerUiPrefab;
 
     [SerializeField]
     private GameObject hpCanvas;
@@ -27,7 +30,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             hpCanvas.SetActive(false);
         }
         else if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsValue("dr"))
-        {
+        {  
             GetComponent<VehicleMovement>().enabled = photonView.IsMine;
             GetComponent<LapController>().enabled = photonView.IsMine;
             camera.enabled = photonView.IsMine;

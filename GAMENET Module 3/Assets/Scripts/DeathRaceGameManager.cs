@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class DeathRaceGameManager : MonoBehaviour
+public class DeathRaceGameManager : MonoBehaviourPunCallbacks
 {
     public static DeathRaceGameManager instance = null;
 
@@ -48,5 +49,21 @@ public class DeathRaceGameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public override void OnLeftRoom()
+    {
+        //PhotonNetwork.LoadLevel("LobbyScene");
+        SceneManager.LoadScene("LobbyScene");
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public void OnQuitGameButtonClicked()
+    {
+        LeaveRoom();
     }
 }

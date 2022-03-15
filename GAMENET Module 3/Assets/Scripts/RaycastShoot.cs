@@ -37,7 +37,6 @@ public class RaycastShoot : MonoBehaviourPunCallbacks
         {
             currentReloadTime -= Time.deltaTime;
         }
-
     }
 
     public void MachineGunFire()

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class Health : MonoBehaviour
+public class Health : MonoBehaviourPunCallbacks
 {
     [Header("HP Variables")]
     public float startHealth = 100;
@@ -41,6 +41,9 @@ public class Health : MonoBehaviour
 
     public void Death()
     {
-
+        if (photonView.IsMine)
+        {
+            this.GetComponent<VehicleMovement>().enabled = false;
+        }
     }
 }

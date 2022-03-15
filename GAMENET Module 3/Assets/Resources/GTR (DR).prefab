@@ -1201,6 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
   playerNameText: {fileID: 4946613083521704599}
+  playerUiPrefab: {fileID: 6925638160460084253, guid: 217c9d65d144e984cbea4f29c07fb70e, type: 3}
   hpCanvas: {fileID: 7669200649613325143}
 --- !u!114 &6911283349989140200
 MonoBehaviour:

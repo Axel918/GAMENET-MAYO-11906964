@@ -443,6 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 0}
   playerNameText: {fileID: 7509768907890790607}
+  playerUiPrefab: {fileID: 0}
   hpCanvas: {fileID: 3189567611791162688}
 --- !u!114 &-6411412907382495739
 MonoBehaviour:
