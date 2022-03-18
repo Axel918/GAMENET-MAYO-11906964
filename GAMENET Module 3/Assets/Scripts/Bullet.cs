@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviourPunCallbacks
         if (other.gameObject.CompareTag("Player") && !other.gameObject.GetComponent<PhotonView>().IsMine)
         {
             Debug.Log("SHOOT TRIGGER");
-            other.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, 5);
+            other.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, 5f);
 
             Destroy(gameObject);
         }

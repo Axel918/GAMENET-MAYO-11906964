@@ -45,23 +45,6 @@ public class ProjectileShoot : MonoBehaviourPunCallbacks
 
     public void ProjectileFire()
     {
-        /*RaycastHit hit;
-        Vector3 targetPoint = new Vector3();
-
-        if (Physics.Raycast(car.transform.position, car.transform.forward, out hit, 200))
-        {
-            targetPoint = hit.point;
-            Debug.Log(hit.collider.gameObject.name);
-        }
-        else
-        {
-            Debug.Log("Out of distance");
-            return;
-        }
-
-        // Calculate direction
-        //Vector3 direction = targetPoint - firePoint.position;*/
-
         photonView.RPC("ShootBullets", RpcTarget.AllBuffered);
     }
 
