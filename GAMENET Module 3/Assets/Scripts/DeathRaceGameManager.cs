@@ -13,6 +13,12 @@ public class DeathRaceGameManager : MonoBehaviourPunCallbacks
     public GameObject[] vehiclePrefabs;
     public Transform[] startingPositions;
     public Text timeText;
+    public GameObject killEventText;
+    public List<GameObject> playersLeft = new List<GameObject>();
+    
+    public GameObject winnerPanel;
+    public GameObject eventsPanel;
+    public Text winnerText;
 
     private void Awake()
     {
@@ -43,6 +49,9 @@ public class DeathRaceGameManager : MonoBehaviourPunCallbacks
                 Vector3 instantiatePosition = startingPositions[actorNumber - 1].position;
                 PhotonNetwork.Instantiate(vehiclePrefabs[(int)playerSelectionNumber].name, instantiatePosition, Quaternion.identity);
             }
+
+            winnerPanel.SetActive(false);
+            eventsPanel.SetActive(true);
         }
     }
 
@@ -52,20 +61,24 @@ public class DeathRaceGameManager : MonoBehaviourPunCallbacks
         
     }
 
-    public override void OnLeftRoom()
+    public void PlayersRemaining()
     {
-        //PhotonNetwork.LoadLevel("LobbyScene");
-        //PhotonNetwork.Disconnect();
-        SceneManager.LoadScene("LobbyScene");
+        if (playersLeft.Count <= 1)
+        {
+            StartCoroutine(DisplayWinner());
+        }
+        else
+        {
+            return;
+        }
     }
 
-    public void LeaveRoom()
+    IEnumerator DisplayWinner()
     {
-        PhotonNetwork.LeaveRoom();
-    }
-
-    public void OnQuitGameButtonClicked()
-    {
-        PhotonNetwork.LeaveRoom();
+        yield return new WaitForSeconds(2.5f);
+        winnerText.text = playersLeft[0].GetComponent<PlayerSetup>().playerName + " wins!";
+        playersLeft[0].GetComponent<VehicleMovement>().enabled = false;
+        winnerPanel.SetActive(true);
+        eventsPanel.SetActive(false);
     }
 }

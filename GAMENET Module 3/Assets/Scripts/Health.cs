@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
 public class Health : MonoBehaviourPunCallbacks
 {
@@ -10,7 +12,49 @@ public class Health : MonoBehaviourPunCallbacks
     public float startHealth;
     private float health;
     public Image healthBar;
-    private bool isAlive;
+    public bool isAlive;
+
+    public enum RaiseEventsCode
+    {
+        WhoDiedEventCode = 0
+    }
+
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+    }
+
+    private void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
+    }
+
+    void OnEvent(EventData photonEvent)
+    {
+        if (photonEvent.Code == (byte)RaiseEventsCode.WhoDiedEventCode)
+        {
+            object[] data = (object[])photonEvent.CustomData;
+
+            string nickNameOfKilledPlayer = (string)data[0];
+            int viewId = (int)data[1];
+
+            Debug.Log(nickNameOfKilledPlayer + " has been eliminated!");
+
+            GameObject killEvent = DeathRaceGameManager.instance.killEventText;
+            killEvent.SetActive(true);
+
+            if (viewId == photonView.ViewID)    // This is you!
+            {
+                killEvent.GetComponent<Text>().text = nickNameOfKilledPlayer + " has been killed!";
+            }
+            else
+            {
+                killEvent.GetComponent<Text>().text = "You have been killed!";
+            }
+
+            StartCoroutine(DeativateObject(killEvent));
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -41,9 +85,35 @@ public class Health : MonoBehaviourPunCallbacks
 
     public void Death()
     {
-        if (photonView.IsMine)
+        GetComponent<PlayerSetup>().camera.transform.parent = null;
+        GetComponent<VehicleMovement>().enabled = false;
+        DeathRaceGameManager.instance.playersLeft.Remove(this.gameObject);
+        DeathRaceGameManager.instance.PlayersRemaining();
+
+        string nickName = photonView.Owner.NickName;
+        int viewId = photonView.ViewID;
+
+        // event data
+        object[] data = new object[] { nickName, viewId };
+
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions
         {
-            this.GetComponent<VehicleMovement>().enabled = false;
-        }
+            Receivers = ReceiverGroup.All,
+            CachingOption = EventCaching.AddToRoomCache
+        };
+
+        SendOptions sendOption = new SendOptions
+        {
+            Reliability = false
+        };
+
+        PhotonNetwork.RaiseEvent((byte)RaiseEventsCode.WhoDiedEventCode, data, raiseEventOptions, sendOption);
+    }
+
+    [PunRPC]
+    IEnumerator DeativateObject(GameObject gmob)
+    {
+        yield return new WaitForSeconds(1.5f);
+        gmob.SetActive(false);
     }
 }

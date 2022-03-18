@@ -16,6 +16,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private GameObject hpCanvas;
+    public string playerName;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +35,14 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             GetComponent<VehicleMovement>().enabled = photonView.IsMine;
             camera.enabled = photonView.IsMine;
             hpCanvas.SetActive(true);
+
+            // Add Player to the list
+            DeathRaceGameManager.instance.playersLeft.Add(this.gameObject);
         }
 
         // Set player name
         playerNameText.text = photonView.Owner.NickName;
+        playerName = photonView.Owner.NickName;
     }
 
     

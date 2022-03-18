@@ -115,17 +115,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2894}
     - Class: 114
-      Script: {instanceID: 2980}
+      Script: {instanceID: 2914}
     - Class: 114
-      Script: {instanceID: 3230}
+      Script: {instanceID: 2982}
     - Class: 114
-      Script: {instanceID: 3692}
+      Script: {instanceID: 3232}
     - Class: 114
-      Script: {instanceID: 3696}
+      Script: {instanceID: 3694}
     - Class: 114
-      Script: {instanceID: 4276}
+      Script: {instanceID: 3698}
     - Class: 114
-      Script: {instanceID: 63588}
+      Script: {instanceID: 4278}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -250,31 +250,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2894}
     - Class: 114
-      Script: {instanceID: 2980}
+      Script: {instanceID: 2914}
     - Class: 114
-      Script: {instanceID: 3182}
+      Script: {instanceID: 2982}
     - Class: 114
-      Script: {instanceID: 3230}
+      Script: {instanceID: 3184}
     - Class: 114
-      Script: {instanceID: 3262}
+      Script: {instanceID: 3232}
     - Class: 114
-      Script: {instanceID: 3692}
+      Script: {instanceID: 3264}
     - Class: 114
-      Script: {instanceID: 3696}
+      Script: {instanceID: 3694}
     - Class: 114
-      Script: {instanceID: 3806}
+      Script: {instanceID: 3698}
     - Class: 114
-      Script: {instanceID: 4006}
+      Script: {instanceID: 3808}
     - Class: 114
-      Script: {instanceID: 4276}
+      Script: {instanceID: 4008}
     - Class: 114
       Script: {instanceID: 4278}
     - Class: 114
-      Script: {instanceID: 4414}
+      Script: {instanceID: 4280}
     - Class: 114
-      Script: {instanceID: 4640}
+      Script: {instanceID: 4416}
     - Class: 114
-      Script: {instanceID: 63588}
+      Script: {instanceID: 4642}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -367,9 +367,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2894}
     - Class: 114
-      Script: {instanceID: 3230}
+      Script: {instanceID: 3232}
     - Class: 114
-      Script: {instanceID: 4276}
+      Script: {instanceID: 4278}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -433,7 +433,7 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
-      Hash: d636257e06fe9e4afd74a11fc640e8f3
+      Hash: 747d446f46d4f86498500bc345dbd76f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerSetup
@@ -721,7 +721,7 @@ ScriptsOnlyBuild:
     className: PlayerControl
   - hash:
       serializedVersion: 2
-      Hash: b9fc77a61b91f259e5caa658c774fa25
+      Hash: fd015f66676c3f89f8f8f11fd7668e60
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DeathRaceGameManager
@@ -1031,6 +1031,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: Photon.Pun.Demo.Cockpit
     className: CurrentRoomIsOfflineProperty
+  - hash:
+      serializedVersion: 2
+      Hash: 72392e42b65649eef7a1955c6a0ec80f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LaserShoot
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -1369,7 +1375,7 @@ ScriptsOnlyBuild:
     className: Bullet
   - hash:
       serializedVersion: 2
-      Hash: 5266caef638ed0c6229d005ff71e4b52
+      Hash: 9d3e520af0a8bcb123387f83e82edfd2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Health
@@ -1799,12 +1805,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: Photon.Pun.Demo.Cockpit.Forms
     className: UserIdUiForm
-  - hash:
-      serializedVersion: 2
-      Hash: 72392e42b65649eef7a1955c6a0ec80f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: LaserShoot
   platform: 19
   scenePathNames:
   - Assets/Scenes/LobbyScene.unity

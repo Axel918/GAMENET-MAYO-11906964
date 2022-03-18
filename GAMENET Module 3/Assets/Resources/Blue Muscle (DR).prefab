@@ -373,6 +373,7 @@ MonoBehaviour:
   playerNameText: {fileID: 2712959628306030946}
   playerUiPrefab: {fileID: 6925638160460084253, guid: 217c9d65d144e984cbea4f29c07fb70e, type: 3}
   hpCanvas: {fileID: 4865904006680378977}
+  playerName: 
 --- !u!114 &-6411412907382495739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 100
   healthBar: {fileID: 126861949036863994}
+  isAlive: 0
 --- !u!114 &8038633542444115201
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319246441161995263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4.06}
+  m_LocalPosition: {x: 0, y: 0, z: 3.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5374569424135801676}
@@ -1549,6 +1549,7 @@ MonoBehaviour:
   playerNameText: {fileID: 8432686783213805956}
   playerUiPrefab: {fileID: 6925638160460084253, guid: 217c9d65d144e984cbea4f29c07fb70e, type: 3}
   hpCanvas: {fileID: 5863367339055949840}
+  playerName: 
 --- !u!114 &5304089037821069116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1590,6 +1591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 100
   healthBar: {fileID: 6067520919762606664}
+  isAlive: 0
 --- !u!114 &696273387133619556
 MonoBehaviour:
   m_ObjectHideFlags: 0

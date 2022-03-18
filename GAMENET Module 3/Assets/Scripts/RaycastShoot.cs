@@ -14,16 +14,23 @@ public class RaycastShoot : MonoBehaviourPunCallbacks
     public float reloadTime;
     private float currentReloadTime;
 
+    private Health lifeDetector;
+    private CountdownManager countdownMng;
+    private VehicleMovement movement;
+
     // Start is called before the first frame update
     void Start()
     {
         currentReloadTime = reloadTime;
+        lifeDetector = this.GetComponent<Health>();
+        countdownMng = this.GetComponent<CountdownManager>();
+        movement = this.GetComponent<VehicleMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (photonView.IsMine)
+        if (photonView.IsMine && lifeDetector.isAlive && movement.isControlEnabled == true)
         {
             if (Input.GetKey(KeyCode.J) && currentReloadTime <= 0)
             {
