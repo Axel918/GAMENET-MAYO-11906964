@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = this.gameObject.transform.GetChild(0).GetComponent<Animator>();
+        animator = this.gameObject.transform.GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -59,7 +59,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.tag == "Tile")
         {
-            collision.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
+            if (collision.GetComponent<SpriteRenderer>().color == new Color(r, g, b))
+            {
+                Debug.Log("Color is the same");
+                return;
+            }
+            else
+            {
+                collision.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
+                Debug.Log("New Color");
+            }
         }
     }
 }
