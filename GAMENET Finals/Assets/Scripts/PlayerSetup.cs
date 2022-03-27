@@ -23,16 +23,9 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
 
         animator.SetBool("isLocalPlayer", photonView.IsMine);
 
-        if (photonView.IsMine)
-        {
-            playerMovement.enabled = true;
-            camera.GetComponent<Camera>().enabled = true;
-        }
-        else
-        {
-            playerMovement.enabled = false;
-            camera.GetComponent<Camera>().enabled = false;
-        }
+        animator.enabled = false;
+        playerMovement.enabled = false;
+        camera.GetComponent<Camera>().enabled = photonView.IsMine;
 
         // Set player name
         playerNameText.text = photonView.Owner.NickName;
@@ -41,6 +34,31 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        
+        if (GameManager.instance.countdownTime <= 0)
+        {
+            SetPlayerViews();
+        }
+
+        if (GameManager.instance.GetCurrentTime() <= 0f)
+        {
+            animator.enabled = false;
+            playerMovement.enabled = false;
+        }
+    }
+
+    public void SetPlayerViews()
+    {
+        if (photonView.IsMine)
+        {
+            playerMovement.enabled = true;
+            //camera.GetComponent<Camera>().enabled = true;
+        }
+        else
+        {
+            playerMovement.enabled = false;
+            //camera.GetComponent<Camera>().enabled = false;
+        }
+
+        animator.enabled = true;
     }
 }
