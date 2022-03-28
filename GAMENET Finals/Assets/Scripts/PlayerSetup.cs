@@ -14,6 +14,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public TextMeshProUGUI playerNameText;
     private PlayerMovement playerMovement;
     private Animator animator;
+    private int playerScore;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +40,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             SetPlayerViews();
         }
 
-        if (GameManager.instance.GetCurrentTime() <= 0f)
+        if (TimerManager.instance.GetCurrentTime() <= 0f)
         {
             animator.enabled = false;
             playerMovement.enabled = false;

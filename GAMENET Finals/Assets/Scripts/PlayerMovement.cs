@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     public float speed;
 
@@ -55,20 +57,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.tag == "Tile")
+        if (collider.tag == "Tile")
         {
-            if (collision.GetComponent<SpriteRenderer>().color == new Color(r, g, b))
+            if (collider.GetComponent<SpriteRenderer>().color == new Color(r, g, b))
             {
                 Debug.Log("Color is the same");
                 return;
             }
             else
             {
-                collision.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
+                collider.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
                 Debug.Log("New Color");
             }
         }
+    }
+
+    public int GetActorNumber()
+    {
+        return PhotonNetwork.LocalPlayer.ActorNumber;
     }
 }

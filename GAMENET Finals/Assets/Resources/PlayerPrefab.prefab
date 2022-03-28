@@ -9913,6 +9913,7 @@ GameObject:
   - component: {fileID: 5095203627807005436}
   - component: {fileID: 4203220291090267611}
   - component: {fileID: 1226545486071986788}
+  - component: {fileID: 2919626566699941463}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Player
@@ -10138,6 +10139,19 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &2919626566699941463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5095203627807005439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b46108fb062dd45b865bc8844ec713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScore: 0
 --- !u!1 &5095203628252406138
 GameObject:
   m_ObjectHideFlags: 0
@@ -10196,7 +10210,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
