@@ -54,6 +54,8 @@ public class ScoreManager : MonoBehaviourPunCallbacks
             place++;
             order++;
         }
+
+        GameManager.instance.CheckWinner(playerData.ElementAt(0).Key, playerData.ElementAt(0).Value);
     }
 
     public void AddData(string name, int score)

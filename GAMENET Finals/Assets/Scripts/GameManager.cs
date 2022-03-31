@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject[] playerScoreItems;
     public GameObject[] inGamePanels;
     public GameObject[] playerGO;
-    public TextMeshProUGUI[] place;
+    public TextMeshProUGUI playerStanding;
 
     public static GameManager instance;
 
@@ -95,17 +95,30 @@ public class GameManager : MonoBehaviourPunCallbacks
     public IEnumerator TimeOver()
     {
         countdownTimeText.text = "Time's Up!";
-
-        yield return new WaitForSeconds(1f);
-
-        foreach(GameObject go in playerGO)
+        
+        foreach (GameObject go in playerGO)
         {
             go.GetComponent<PlayerStatus>().EvaluateScore();
         }
 
+        ScoreManager.instance.SortScore();
+        
+        yield return new WaitForSeconds(1.0f);
+
         countdownTimeText.text = "";
         inGamePanels[0].SetActive(false);
         inGamePanels[1].SetActive(true);
-        ScoreManager.instance.SortScore();
-    }    
+        
+    }
+
+    public void CheckWinner(string name, int score)
+    {
+        foreach (GameObject go in playerGO)
+        {
+            if (go.GetComponent<PlayerStatus>().playerName == name && go.GetComponent<PlayerStatus>().playerScore == score)
+            {
+                go.GetComponent<PlayerEvents>().PlayerStanding();
+            }
+        }
+    }
 }

@@ -1052,7 +1052,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299193246}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a1d495b2ff2815e4d93c54fbd43217b7, type: 3}
@@ -1655,7 +1655,7 @@ MonoBehaviour:
   - {fileID: 785022799}
   - {fileID: 1469564343}
   - {fileID: 2033372720}
-  startMinutes: 3
+  startMinutes: 1
   currentTimeText: {fileID: 1650999590}
   timerActive: 0
   background: {fileID: 4759882882588550263}
@@ -4481,7 +4481,6 @@ MonoBehaviour:
   scoreText: {fileID: 940809441}
   score: 0
   currentScore: 0
-  tiles: []
   r: 0
   g: 0
   b: 255
@@ -5374,7 +5373,7 @@ MonoBehaviour:
   - {fileID: 722618839900436731}
   - {fileID: 195548790}
   playerGO: []
-  place: []
+  playerStanding: {fileID: 1974791809}
   countdownTime: 3
   countdownTimeText: {fileID: 810029160}
   bgm: {fileID: 299193246}
@@ -5616,7 +5615,6 @@ MonoBehaviour:
   scoreText: {fileID: 351348712}
   score: 0
   currentScore: 0
-  tiles: []
   r: 255
   g: 255
   b: 0
@@ -6735,7 +6733,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Win! You reached nth place.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7184,7 +7182,6 @@ MonoBehaviour:
   scoreText: {fileID: 1709627678}
   score: 0
   currentScore: 0
-  tiles: []
   r: 255
   g: 0
   b: 255
@@ -7689,10 +7686,10 @@ RectTransform:
   m_Father: {fileID: 722618839900436730}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000010728836, y: 310}
-  m_SizeDelta: {x: 99.5006, y: 43.708}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -0.0000010728836, y: -53.02066}
+  m_SizeDelta: {x: 99.5006, y: 43.708008}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &722618839900436484
 CanvasRenderer:
@@ -7884,7 +7881,6 @@ MonoBehaviour:
   scoreText: {fileID: 1477663486}
   score: 0
   currentScore: 0
-  tiles: []
   r: 255
   g: 0
   b: 0

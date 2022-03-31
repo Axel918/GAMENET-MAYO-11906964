@@ -14,10 +14,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
 
     private Vector2 moveVelocity;
 
-    public float r;
-    public float g;
-    public float b;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -54,23 +50,6 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         else
         {
             animator.SetBool("isRunning", true);
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.tag == "Tile")
-        {
-            if (collider.GetComponent<SpriteRenderer>().color == new Color(r, g, b))
-            {
-                Debug.Log("Color is the same");
-                return;
-            }
-            else
-            {
-                collider.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
-                Debug.Log("New Color");
-            }
         }
     }
 

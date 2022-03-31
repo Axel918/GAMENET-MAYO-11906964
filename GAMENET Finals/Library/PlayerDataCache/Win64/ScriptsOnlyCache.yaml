@@ -6,6 +6,7 @@ ScriptsOnlyBuild:
     - LerpColor
     - MainMenu
     - NetworkManager
+    - PlayerEvents
     - PlayerListItemInitializer
     - PlayerMovement
     - PlayerScoreItem
@@ -151,6 +152,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3928}
     - Class: 114
       Script: {instanceID: 4694}
+    - Class: 114
+      Script: {instanceID: 4732}
     - Class: 114
       Script: {instanceID: 4778}
     - Class: 114
@@ -385,6 +388,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4650}
     - Class: 114
       Script: {instanceID: 4656}
+    - Class: 114
+      Script: {instanceID: 4732}
     - Class: 114
       Script: {instanceID: 4778}
     - Class: 114
@@ -702,7 +707,7 @@ ScriptsOnlyBuild:
     className: IngameControlPanel
   - hash:
       serializedVersion: 2
-      Hash: 44427c521e67c09bed820b4d676b6e05
+      Hash: 59a63e12920d0179970d4a3623942278
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerStatus
@@ -1488,7 +1493,7 @@ ScriptsOnlyBuild:
     className: SpriteShapeGeometryCache
   - hash:
       serializedVersion: 2
-      Hash: bd9316444cc013925b79daf80da01ea3
+      Hash: afc5b93a7b192de2dcb3832fe35a5c7e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovement
@@ -1782,7 +1787,7 @@ ScriptsOnlyBuild:
     className: PropertyCell
   - hash:
       serializedVersion: 2
-      Hash: a9a188061c1261d380fa049e90732a8d
+      Hash: 27ccc8f06dc1550f0eee5865d7847b78
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerScoreItem
@@ -1836,7 +1841,7 @@ ScriptsOnlyBuild:
     className: PunTurnManager
   - hash:
       serializedVersion: 2
-      Hash: e8d558a2311f6475e5b0b016a129118b
+      Hash: ae971fe2971b1ce438788df6fd96bb31
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
