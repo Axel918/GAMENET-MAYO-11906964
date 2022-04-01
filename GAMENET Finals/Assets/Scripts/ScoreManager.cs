@@ -50,7 +50,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         foreach (var item in playerData.OrderByDescending(r => r.Value).Take(PhotonNetwork.PlayerList.Length))
         {
             Debug.Log(item.Key + " | " + item.Value);
-            playerRankText[order].text = "#" + place + " | " + item.Value.ToString() +  " | " + item.Key.ToString();
+            playerRankText[order].text = "#" + place + " | " + item.Key.ToString() +  " | " + item.Value.ToString();
             place++;
             order++;
         }

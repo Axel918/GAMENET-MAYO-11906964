@@ -10198,6 +10198,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: []
+  statusEffects:
+  - {fileID: 1027622267539011329}
+  - {fileID: 1062007942350234581}
+  - {fileID: 1044806078957020569}
   playerScore: 0
   playerName: 
   playerActorNumber: 0

@@ -46,7 +46,7 @@ public class PlayerEvents : MonoBehaviourPunCallbacks
             }
             else
             {
-                playerStandingText.text = "You Lose!";
+                playerStandingText.text = "YOU LOSE!";
             }
         }
     }

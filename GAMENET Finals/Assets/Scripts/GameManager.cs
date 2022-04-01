@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using Photon.Pun;
@@ -34,8 +35,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
@@ -48,9 +47,10 @@ public class GameManager : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate(playerPrefabs[actorNumber - 1].name, SpawnManager.instance.spawnPoints[actorNumber - 1].position, Quaternion.identity);
         }
 
-        StartCoroutine(CountdownToStart());
+        inGamePanels[0].SetActive(true);
+        inGamePanels[1].SetActive(false);
 
-        
+        StartCoroutine(CountdownToStart());
     }
 
     // Update is called once per frame
@@ -115,10 +115,33 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         foreach (GameObject go in playerGO)
         {
-            if (go.GetComponent<PlayerStatus>().playerName == name && go.GetComponent<PlayerStatus>().playerScore == score)
+            if (name == go.GetComponent<PlayerStatus>().playerName && score == go.GetComponent<PlayerStatus>().playerScore)
             {
                 go.GetComponent<PlayerEvents>().PlayerStanding();
             }
+            else
+            {
+                return;
+            }
         }
+    }
+
+    public override void OnLeftRoom()
+    {
+        //PhotonNetwork.LoadLevel("LobbyScene");
+        SceneManager.LoadScene("LobbyScene");
+        //PhotonNetwork.Disconnect();
+    }
+
+    public void OnReturnToLobbyButtonClikced()
+    {
+        StartCoroutine(LeaveTheRoom());
+    }
+
+    IEnumerator LeaveTheRoom()
+    {
+        yield return new WaitForSeconds(1.0f);
+        
+        PhotonNetwork.LeaveRoom();
     }
 }

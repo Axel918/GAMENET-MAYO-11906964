@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class PlayerStatus : MonoBehaviourPunCallbacks
 {
     public GameObject[] tiles;
+    public GameObject[] statusEffects;
     public int playerScore;
     public string playerName;
     private bool hasSubmittedData;
@@ -55,6 +56,39 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
         {
             Debug.Log("You hit an enemy");
         }
+
+        if (collider.tag == "Power-Up")
+        {
+            PowerUps power = collider.GetComponent<PowerUps>();
+            
+            if (power.type == PowerUps.PowerUpType.SPEED_UP)
+            {
+                photonView.RPC("SpeedUp", RpcTarget.AllBuffered);
+            }
+            else if (power.type == PowerUps.PowerUpType.SLOW_DOWN)
+            {
+                foreach (GameObject go in GameManager.instance.playerGO)
+                {
+                    if (this.gameObject != go)
+                    {
+                        go.GetComponent<PlayerMovement>().speed /= 2;
+                    }
+                }
+            }
+            else if (power.type == PowerUps.PowerUpType.KNOCK_OUT)
+            {
+
+            }
+
+            Destroy(collider.gameObject);
+        }
+    }
+
+    [PunRPC]
+    public void SpeedUp()
+    {
+        gameObject.GetComponent<PlayerMovement>().speed = 10;
+        statusEffects[0].SetActive(true);
     }
 
     public void EvaluateScore()

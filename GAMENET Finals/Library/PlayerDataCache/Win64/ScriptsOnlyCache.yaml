@@ -12,6 +12,7 @@ ScriptsOnlyBuild:
     - PlayerScoreItem
     - PlayerSetup
     - PlayerStatus
+    - PowerUps
     - ScoreManager
     - SpawnManager
     - TimerManager
@@ -26,6 +27,8 @@ ScriptsOnlyBuild:
     - Photon.Pun.Demo.PunBasics.PlayerUI
     - Photon.Pun.Demo.SlotRacer.PlayerControl
     - Photon.Pun.Demo.SlotRacer.Utils.SplineWalker
+    PhotonUnityNetworking.Editor.dll:
+    - Photon.Pun.PunSceneSettings
     PhotonUnityNetworking.dll:
     - Photon.Pun.PhotonAnimatorView
     - Photon.Pun.PhotonRigidbodyView
@@ -149,6 +152,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3484}
     - Class: 114
+      Script: {instanceID: 3602}
+    - Class: 114
       Script: {instanceID: 3928}
     - Class: 114
       Script: {instanceID: 4694}
@@ -170,6 +175,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5814}
     - Class: 114
       Script: {instanceID: 5978}
+    - Class: 114
+      Script: {instanceID: 61094}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -707,7 +714,7 @@ ScriptsOnlyBuild:
     className: IngameControlPanel
   - hash:
       serializedVersion: 2
-      Hash: 59a63e12920d0179970d4a3623942278
+      Hash: d573c981f82d8c380ba0c515cd211516
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerStatus
@@ -1989,6 +1996,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit.Forms
     className: UserIdUiForm
+  - hash:
+      serializedVersion: 2
+      Hash: 284f5d9bdaed2e2fa4d300ea0adcd718
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PowerUps
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenuScene.unity

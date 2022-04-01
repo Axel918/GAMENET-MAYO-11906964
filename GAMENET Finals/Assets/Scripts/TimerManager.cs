@@ -32,8 +32,6 @@ public class TimerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update
@@ -67,10 +65,11 @@ public class TimerManager : MonoBehaviour
                 Debug.Log("Time Over");
             }
 
+            TimeSpan time = TimeSpan.FromSeconds(currentTime);
+            currentTimeText.text = time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
         }
 
-        TimeSpan time = TimeSpan.FromSeconds(currentTime);
-        currentTimeText.text = time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
+      
     }
 
     public float GetCurrentTime()
