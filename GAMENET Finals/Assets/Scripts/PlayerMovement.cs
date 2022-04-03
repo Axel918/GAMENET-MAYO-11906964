@@ -52,9 +52,4 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             animator.SetBool("isRunning", true);
         }
     }
-
-    public int GetActorNumber()
-    {
-        return PhotonNetwork.LocalPlayer.ActorNumber;
-    }
 }

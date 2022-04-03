@@ -14,13 +14,13 @@ public class PlayerEvents : MonoBehaviourPunCallbacks
         WhoWonEventCode = 0
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
         Debug.Log("Enabled");
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
         Debug.Log("Disabled");
@@ -32,11 +32,7 @@ public class PlayerEvents : MonoBehaviourPunCallbacks
         {
             object[] data = (object[])photonEvent.CustomData;
 
-            /*string nickNameOfFinishedPlayer = (string)data[0];
-            finishOrder = (int)data[1];*/
             int viewId = (int)data[0];
-
-            //Debug.Log(nickNameOfFinishedPlayer + " " + finishOrder);
 
             TextMeshProUGUI playerStandingText = GameManager.instance.playerStanding;
 
@@ -49,18 +45,6 @@ public class PlayerEvents : MonoBehaviourPunCallbacks
                 playerStandingText.text = "YOU LOSE!";
             }
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void PlayerStanding()
@@ -84,5 +68,4 @@ public class PlayerEvents : MonoBehaviourPunCallbacks
 
         PhotonNetwork.RaiseEvent((byte)RaiseEventsCode.WhoWonEventCode, data, raiseEventOptions, sendOption);
     }
-  
 }

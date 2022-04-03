@@ -16,12 +16,20 @@ public class PowerUps : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Destroys the object if not picked up
+        StartCoroutine(Destructor());
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    IEnumerator Destructor()
+    {
+        yield return new WaitForSeconds(20f);
+
+        Destroy(gameObject);
     }
 }

@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     public static ScoreManager instance;
 
     public TextMeshProUGUI[] playerRankText;
-    public Dictionary<string, int> playerData;
+    public List<GameObject> players;
 
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        playerData = new Dictionary<string, int>();
+
     }
 
     // Update is called once per frame
@@ -41,25 +41,39 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     public void SortScore()
     {
-        var topPlayers = playerData.OrderByDescending(pair => pair.Value).Take(PhotonNetwork.PlayerList.Length);
+        for (int lastSortedIndex = players.Count - 1; lastSortedIndex > 0; lastSortedIndex--)
+        {
+            for (int i = 0; i < lastSortedIndex; i++)
+            {
+                if (players[i].GetComponent<PlayerStatus>().playerScore < players[i + 1].GetComponent<PlayerStatus>().playerScore)
+                {
+                    GameObject temp = players[i];
+                    players[i] = players[i + 1];
+                    players[i + 1] = temp;
+                }
+            }
+        }
 
+        PresentResults();
+    }
+
+    private void PresentResults()
+    {
         int order = 0;
         int place = 1;
 
-        // Present the Results
-        foreach (var item in playerData.OrderByDescending(r => r.Value).Take(PhotonNetwork.PlayerList.Length))
+        foreach (GameObject go in players)
         {
-            Debug.Log(item.Key + " | " + item.Value);
-            playerRankText[order].text = "#" + place + " | " + item.Key.ToString() +  " | " + item.Value.ToString();
+            Debug.Log(go.GetComponent<PlayerStatus>().playerName + " | " + go.GetComponent<PlayerStatus>().playerScore);
+
+            playerRankText[order].text = "#" + place + " | " + go.GetComponent<PlayerStatus>().playerName + " | " + go.GetComponent<PlayerStatus>().playerScore;
+
             place++;
             order++;
         }
 
-        GameManager.instance.CheckWinner(playerData.ElementAt(0).Key, playerData.ElementAt(0).Value);
-    }
+        Debug.Log("Winner: " + players[0].GetComponent<PlayerStatus>().playerName);
 
-    public void AddData(string name, int score)
-    {
-        playerData.Add(name, score);
+        players[0].GetComponent<PlayerEvents>().PlayerStanding();
     }
 }

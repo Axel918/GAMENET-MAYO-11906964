@@ -45,6 +45,11 @@ MonoBehaviour:
   - EvaluateScore
   - Score
   - SpeedUp
+  - KnockOut
+  - SlowDown
+  - Spawner
+  - KillOpposingPlayer
+  - PlayerKilled
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

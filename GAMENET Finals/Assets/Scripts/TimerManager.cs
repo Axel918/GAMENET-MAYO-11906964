@@ -63,6 +63,12 @@ public class TimerManager : MonoBehaviour
                 timerActive = false;
                 StartCoroutine(GameManager.instance.TimeOver());
                 Debug.Log("Time Over");
+
+                foreach (GameObject go in GameManager.instance.playerGO)
+                {
+                    go.GetComponent<PlayerSetup>().GetAnimator().enabled = false;
+                    go.GetComponent<PlayerSetup>().GetPlayerMovement().enabled = false;
+                }
             }
 
             TimeSpan time = TimeSpan.FromSeconds(currentTime);

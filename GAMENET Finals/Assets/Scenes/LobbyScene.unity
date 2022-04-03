@@ -349,7 +349,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 150474302}
   - component: {fileID: 150474301}
   - component: {fileID: 150474300}
+  - component: {fileID: 150474303}
   m_Layer: 5
   m_Name: PlayerNameInputField
   m_TagString: Untagged
@@ -882,6 +883,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 150474298}
   m_CullTransparentMesh: 1
+--- !u!114 &150474303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150474298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &154896632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,7 +2230,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4440,7 +4456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1041774173
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4568,8 +4584,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4648,6 +4664,7 @@ GameObject:
   - component: {fileID: 1159371254}
   - component: {fileID: 1159371253}
   - component: {fileID: 1159371252}
+  - component: {fileID: 1159371255}
   m_Layer: 5
   m_Name: RoomNameInputField
   m_TagString: Untagged
@@ -4811,6 +4828,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159371250}
   m_CullTransparentMesh: 1
+--- !u!114 &1159371255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159371250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1184721607
 GameObject:
   m_ObjectHideFlags: 0
@@ -5080,7 +5112,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5595,8 +5627,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6045,7 +6077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1664235071
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6823,6 +6855,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 501344612}
     m_Modifications:
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
+      propertyPath: _gradientType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.ctime0
       value: 0
       objectReference: {fileID: 0}
@@ -6836,7 +6872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key0.b
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key0.g
@@ -6844,19 +6880,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key0.r
-      value: 0.0882926
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key1.b
-      value: 0.86063355
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key1.g
-      value: 0.8454898
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key1.r
-      value: 0.8468269
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key2.b
@@ -6869,6 +6905,14 @@ PrefabInstance:
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.m_NumColorKeys
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566328818500905718, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
+      propertyPath: m_Looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5566328818500905718, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
+      propertyPath: m_WaitForFirstFrame
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5566328819403358132, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: m_Name
@@ -7085,7 +7129,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7217,7 +7261,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

@@ -12,7 +12,6 @@ using TMPro;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject[] playerPrefabs;
-    public GameObject[] playerScoreItems;
     public GameObject[] inGamePanels;
     public GameObject[] playerGO;
     public TextMeshProUGUI playerStanding;
@@ -81,11 +80,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(1f);
 
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        foreach (GameObject go in playerGO)
         {
-            playerScoreItems[i].SetActive(true);
-
-            playerGO[i].GetComponent<PlayerStatus>().playerActorNumber = i;
+            go.GetComponent<PlayerSetup>().SetPlayerViews();
         }
 
         TimerManager.instance.timerActive = true;
@@ -99,38 +96,20 @@ public class GameManager : MonoBehaviourPunCallbacks
         foreach (GameObject go in playerGO)
         {
             go.GetComponent<PlayerStatus>().EvaluateScore();
+            ScoreManager.instance.players.Add(go);
         }
 
-        ScoreManager.instance.SortScore();
-        
         yield return new WaitForSeconds(1.0f);
+
+        ScoreManager.instance.SortScore();
 
         countdownTimeText.text = "";
         inGamePanels[0].SetActive(false);
         inGamePanels[1].SetActive(true);
-        
     }
-
-    public void CheckWinner(string name, int score)
-    {
-        foreach (GameObject go in playerGO)
-        {
-            if (name == go.GetComponent<PlayerStatus>().playerName && score == go.GetComponent<PlayerStatus>().playerScore)
-            {
-                go.GetComponent<PlayerEvents>().PlayerStanding();
-            }
-            else
-            {
-                return;
-            }
-        }
-    }
-
     public override void OnLeftRoom()
     {
-        //PhotonNetwork.LoadLevel("LobbyScene");
         SceneManager.LoadScene("LobbyScene");
-        //PhotonNetwork.Disconnect();
     }
 
     public void OnReturnToLobbyButtonClikced()
