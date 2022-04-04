@@ -64,9 +64,19 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
         foreach (GameObject go in players)
         {
+            float red = go.GetComponent<PlayerStatus>().r;
+            float green = go.GetComponent<PlayerStatus>().g;
+            float blue = go.GetComponent<PlayerStatus>().b;
+
             Debug.Log(go.GetComponent<PlayerStatus>().playerName + " | " + go.GetComponent<PlayerStatus>().playerScore);
 
-            playerRankText[order].text = "#" + place + " | " + go.GetComponent<PlayerStatus>().playerName + " | " + go.GetComponent<PlayerStatus>().playerScore;
+            playerRankText[order].text = "#" + place + " | " + go.GetComponent<PlayerStatus>().playerName + " | Score: " + go.GetComponent<PlayerStatus>().playerScore;
+
+            playerRankText[order].color = new Color(red, green, blue);
+
+            go.GetComponent<PlayerStatus>().SetPlace(place);
+            go.GetComponent<PlayerStatus>().ToOrdinal(place);
+            go.GetComponent<PlayerStatus>().ShowPlayerRank();
 
             place++;
             order++;

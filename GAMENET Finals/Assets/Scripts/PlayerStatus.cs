@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -12,6 +13,8 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
     public string playerName;
     private int playerActorNumber;
     public GameObject explosion;
+    private int place;
+    private string ordinalPlace;
 
     // Power-up booleans
     private bool canKill;
@@ -202,5 +205,61 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
                 playerScore++;
             }
         }
+    }
+
+    public void ToOrdinal(int value)
+    {
+        // Default suffix.
+        string suffix = "TH";
+
+        // Get the last 2 digits.
+        int lastTwoDigits = value % 100;
+
+        // If the last 2 digits are 11, 12, or 13, use th. Otherwise:
+        if (lastTwoDigits < 11 || lastTwoDigits > 13)
+        {
+            // Check the last digit.
+            switch (lastTwoDigits % 10)
+            {
+                case 1:
+                    suffix = "ST";
+                    break;
+                case 2:
+                    suffix = "ND";
+                    break;
+                case 3:
+                    suffix = "RD";
+                    break;
+            }
+        }
+
+        ordinalPlace = value + suffix;
+    }
+
+    public void ShowPlayerRank()
+    {
+        TextMeshProUGUI playerStandingText = GameManager.instance.playerStanding;
+
+        if (photonView.IsMine)
+        {
+            playerStandingText.text = "YOU REACHED " + ordinalPlace + " PLACE.";
+        }
+    }
+
+    // Getters
+    public int GetActorNumber()
+    {
+        return playerActorNumber;
+    }
+
+    public string GetOrdinalPlace()
+    {
+        return ordinalPlace;
+    }
+
+    // Setters
+    public void SetPlace(int value)
+    {
+        place = value;
     }
 }

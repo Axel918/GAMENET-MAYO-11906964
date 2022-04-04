@@ -43,10 +43,12 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             playerMovement.enabled = true;
+            GetComponent<PlayerEvents>().enabled = true;
         }
         else
         {
             playerMovement.enabled = false;
+            GetComponent<PlayerEvents>().enabled = false;
         }
 
         animator.enabled = true;

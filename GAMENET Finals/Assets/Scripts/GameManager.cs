@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject[] playerPrefabs;
     public GameObject[] inGamePanels;
     public GameObject[] playerGO;
+    public TextMeshProUGUI playerResult;
     public TextMeshProUGUI playerStanding;
 
     public static GameManager instance;
@@ -99,9 +100,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             ScoreManager.instance.players.Add(go);
         }
 
-        yield return new WaitForSeconds(1.0f);
-
         ScoreManager.instance.SortScore();
+
+        yield return new WaitForSeconds(1.0f);
 
         countdownTimeText.text = "";
         inGamePanels[0].SetActive(false);

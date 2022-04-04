@@ -34,26 +34,30 @@ public class PlayerEvents : MonoBehaviourPunCallbacks
 
             int viewId = (int)data[0];
 
-            TextMeshProUGUI playerStandingText = GameManager.instance.playerStanding;
+            TextMeshProUGUI playerResultText = GameManager.instance.playerResult;
 
             if (viewId == photonView.ViewID)    // This is you!
             {
-                playerStandingText.text = "YOU WIN! YOU REACHED 1ST PLACE.";
+                playerResultText.text = "YOU WIN!";
+                Debug.Log("Win");
             }
             else
             {
-                playerStandingText.text = "YOU LOSE!";
+                playerResultText.text = "YOU LOSE!";
+                Debug.Log("Lose");
             }
         }
     }
 
     public void PlayerStanding()
     {
-        string nickName = photonView.Owner.NickName;
+        Debug.Log(this.GetComponent<PlayerStatus>().playerName + " Event Has Been Called!");
+        
         int viewId = photonView.ViewID;
+        string place = GetComponent<PlayerStatus>().GetOrdinalPlace();
 
         // event data
-        object[] data = new object[] { viewId };
+        object[] data = new object[] { viewId};
 
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions
         {
