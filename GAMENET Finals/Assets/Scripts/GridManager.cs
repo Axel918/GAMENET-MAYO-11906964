@@ -16,12 +16,6 @@ public class GridManager : MonoBehaviour
         GenerateGrid();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void GenerateGrid()
     {
         GameObject referenceTile = (GameObject)Instantiate(coloredTile);

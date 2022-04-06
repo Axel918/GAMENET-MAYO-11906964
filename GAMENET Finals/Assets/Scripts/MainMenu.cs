@@ -11,9 +11,20 @@ public class MainMenu : MonoBehaviour
     public GameObject tutorialPanel;
     public GameObject creditsPanel;
 
+    [Header("Tutorial Panels")]
+    public GameObject[] tutorialPages;
+
+    [Header("Credits Panels")]
+    public GameObject[] creditsPages;
+
+    private int tutorialPageNumber;
+    private int creditsPageNumber;
+
     private void Start()
     {
         ActivatePanel(mainMenuPanel);
+        tutorialPageNumber = 0;
+        creditsPageNumber = 0;
     }
 
     public void OnPlayButtonClicked()
@@ -31,6 +42,7 @@ public class MainMenu : MonoBehaviour
     public void OnTutorialReturnButtonClicked()
     {
         ActivatePanel(mainMenuPanel);
+        TutorialPanel(tutorialPages[0]);
     }
 
     public void OnCreditsButtonClicked()
@@ -42,6 +54,7 @@ public class MainMenu : MonoBehaviour
     public void OnCreditsReturnButtonClicked()
     {
         ActivatePanel(mainMenuPanel);
+        CreditsPanel(creditsPages[0]);
     }
 
     public void OnQuitGameButtonClicked()
@@ -55,5 +68,67 @@ public class MainMenu : MonoBehaviour
         mainMenuPanel.SetActive(chosenPanel.Equals(mainMenuPanel));
         tutorialPanel.SetActive(chosenPanel.Equals(tutorialPanel));
         creditsPanel.SetActive(chosenPanel.Equals(creditsPanel));
+    }
+
+    public void TutorialPanel(GameObject chosenPanel)
+    {
+        tutorialPages[0].SetActive(chosenPanel.Equals(tutorialPages[0]));
+        tutorialPages[1].SetActive(chosenPanel.Equals(tutorialPages[1]));
+    }
+
+    public void CreditsPanel(GameObject chosenPanel)
+    {
+        creditsPages[0].SetActive(chosenPanel.Equals(creditsPages[0]));
+        creditsPages[1].SetActive(chosenPanel.Equals(creditsPages[1]));
+    }
+
+    // Tutorial
+    public void TutorialPrevious()
+    {
+        tutorialPageNumber--;
+
+        if (tutorialPageNumber < 0)
+        {
+            tutorialPageNumber = 0;
+        }
+
+        TutorialPanel(tutorialPages[tutorialPageNumber]);
+    }
+
+    public void TutorialNext()
+    {
+        tutorialPageNumber++;
+
+        if (tutorialPageNumber >= tutorialPages.Length)
+        {
+            tutorialPageNumber = tutorialPages.Length - 1;
+        }
+
+        TutorialPanel(tutorialPages[tutorialPageNumber]);
+    }
+
+    // Credits
+    public void CreditsPrevious()
+    {
+        creditsPageNumber--;
+
+        if (creditsPageNumber < 0)
+        {
+            creditsPageNumber = 0;
+        }
+
+        CreditsPanel(creditsPages[creditsPageNumber]);
+    }
+
+    public void CreditsNext()
+    {
+        creditsPageNumber++;
+
+        if (creditsPageNumber >= creditsPages.Length)
+        {
+            creditsPageNumber = creditsPages.Length - 1;
+        }
+
+        CreditsPanel(creditsPages[creditsPageNumber]);
     }
 }

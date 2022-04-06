@@ -32,12 +32,6 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         playerNameText.text = photonView.Owner.NickName;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SetPlayerViews()
     {
         if (photonView.IsMine)

@@ -74,8 +74,6 @@ public class TimerManager : MonoBehaviour
             TimeSpan time = TimeSpan.FromSeconds(currentTime);
             currentTimeText.text = time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
         }
-
-      
     }
 
     public float GetCurrentTime()
@@ -86,6 +84,7 @@ public class TimerManager : MonoBehaviour
     IEnumerator LastMinute()
     {
         countdownTimeText.text = "LAST 2 MINUTES!";
+
         GameManager.instance.bgm.GetComponent<AudioSource>().Stop();
         GameManager.instance.bgm.GetComponent<AudioSource>().pitch = 1.25f;
         GameManager.instance.bgm.GetComponent<AudioSource>().Play();

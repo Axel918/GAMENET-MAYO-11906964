@@ -8,7 +8,6 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
-
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject[] playerPrefabs;
@@ -49,16 +48,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate(playerPrefabs[actorNumber - 1].name, spawnPoints[actorNumber - 1].position, Quaternion.identity);
         }
 
-        inGamePanels[0].SetActive(true);
-        inGamePanels[1].SetActive(false);
+        ActivatePanel(inGamePanels[0]);
 
         StartCoroutine(CountdownToStart());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     // Countdown before game begins
@@ -77,11 +69,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         countdownTimeText.text = "GO!";
 
-        bgm.GetComponent<AudioSource>().Play();
-
         playerGO = GameObject.FindGameObjectsWithTag("Player");
 
         yield return new WaitForSeconds(1f);
+
+        bgm.GetComponent<AudioSource>().Play();
 
         int i = 0;
 
@@ -100,6 +92,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         countdownTimeText.text = "Time's Up!";
         
+        yield return new WaitForSeconds(1.0f);
+
         foreach (GameObject go in playerGO)
         {
             ScoreManager.instance.players.Add(go);
@@ -107,11 +101,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         ScoreManager.instance.SortScore();
 
-        yield return new WaitForSeconds(1.0f);
-
         countdownTimeText.text = "";
-        inGamePanels[0].SetActive(false);
-        inGamePanels[1].SetActive(true);
+        ActivatePanel(inGamePanels[1]);
     }
     public override void OnLeftRoom()
     {
@@ -128,5 +119,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(1.0f);
         
         PhotonNetwork.LeaveRoom();
+    }
+
+    public void ActivatePanel(GameObject chosenPanel)
+    {
+        inGamePanels[0].SetActive(chosenPanel.Equals(inGamePanels[0]));
+        inGamePanels[1].SetActive(chosenPanel.Equals(inGamePanels[1]));
     }
 }

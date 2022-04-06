@@ -5,24 +5,5 @@ using TMPro;
 
 public class PlayerScoreItem : MonoBehaviour
 {
-    
     public TextMeshProUGUI scoreText;
-    public int score;
-    public int currentScore;
-
-    public float r;
-    public float g;
-    public float b;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -20,15 +20,9 @@ public class PowerUps : MonoBehaviour
         StartCoroutine(Destructor());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator Destructor()
     {
-        yield return new WaitForSeconds(20f);
+        yield return new WaitForSeconds(10f);
 
         Destroy(gameObject);
     }

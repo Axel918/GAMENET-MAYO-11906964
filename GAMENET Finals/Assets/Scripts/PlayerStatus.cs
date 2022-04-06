@@ -36,12 +36,6 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
         playerColor = new Color(r, g, b);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collider)
     {
         // If player collides with a tile
@@ -111,6 +105,11 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
                 photonView.RPC("KnockOut", RpcTarget.AllBuffered);
             }
 
+            if (photonView.IsMine)
+            {
+                AudioManager.instance.powerUp.Play();
+            }
+            
             Destroy(collider.gameObject);
         }
     }
@@ -128,6 +127,12 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
     public void DecreaseScore()
     {
         this.playerScore--;
+
+        if (this.playerScore < 0)
+        {
+            this.playerScore = 0;
+        }
+
         GameManager.instance.playerScoreItems[playerActorNumber - 1].GetComponent<PlayerScoreItem>().scoreText.text = this.playerScore.ToString();
     }
 
@@ -144,7 +149,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
         {
             if (this.gameObject != go)
             {
-                go.GetComponent<PlayerMovement>().speed = 2.5f;
+                go.GetComponent<PlayerMovement>().speed = 1.5f;
                 go.GetComponent<PlayerStatus>().statusEffects[1].SetActive(true);
                 go.GetComponent<PlayerStatus>().StartCoroutine(SlowDownTimer());
             }

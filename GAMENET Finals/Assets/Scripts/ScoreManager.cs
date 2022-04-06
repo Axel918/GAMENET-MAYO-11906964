@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using System.Linq;
-
 
 public class ScoreManager : MonoBehaviourPunCallbacks
 {
@@ -25,18 +23,6 @@ public class ScoreManager : MonoBehaviourPunCallbacks
         {
             instance = this;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SortScore()
