@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoBehaviourPunCallbacks
 {
     public static SpawnManager instance;
-
-    public Transform[] spawnPoints;
 
     public float minX;
     public float maxX;
@@ -18,22 +19,33 @@ public class SpawnManager : MonoBehaviour
     public float time;
     private float currentTime;
 
-    private void Awake()
+    public enum RaiseEventsCode
     {
-        if (instance != null)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
+        SpawnPowerUpEventCode = 1
+    }
 
-        spawnPoints = new Transform[transform.childCount];
+    void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+    }
 
-        for (int i = 0; i < transform.childCount; i++)
+    void OnDisable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
+    }
+
+    void OnEvent(EventData photonEvent)
+    {
+        if (photonEvent.Code == (byte)RaiseEventsCode.SpawnPowerUpEventCode)
         {
-            spawnPoints[i] = transform.GetChild(i);
+            object[] data = (object[])photonEvent.CustomData;
+
+            int randomIndex = (int)data[0];
+            float randomX = (float)data[1];
+            float randomY = (float)data[2];
+
+            Debug.Log("Spawn Power-up");
+            Instantiate(powerUps[randomIndex], new Vector2(randomX, randomY), Quaternion.identity);
         }
     }
 
@@ -64,6 +76,20 @@ public class SpawnManager : MonoBehaviour
         float randomX = Random.Range(minX, maxX);
         float randomY = Random.Range(minY, maxY);
 
-        Instantiate(powerUps[randomIndex], new Vector2(randomX, randomY), Quaternion.identity);
+        // event data
+        object[] data = new object[] { randomIndex, randomX, randomY };
+
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+        {
+            Receivers = ReceiverGroup.All,
+            CachingOption = EventCaching.AddToRoomCache
+        };
+
+        SendOptions sendOption = new SendOptions
+        {
+            Reliability = false
+        };
+
+        PhotonNetwork.RaiseEvent((byte)RaiseEventsCode.SpawnPowerUpEventCode, data, raiseEventOptions, sendOption);
     }
 }

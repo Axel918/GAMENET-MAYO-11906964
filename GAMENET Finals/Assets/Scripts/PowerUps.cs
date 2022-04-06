@@ -17,7 +17,7 @@ public class PowerUps : MonoBehaviour
     void Start()
     {
         // Destroys the object if not picked up
-        //StartCoroutine(Destructor());
+        StartCoroutine(Destructor());
     }
 
     // Update is called once per frame

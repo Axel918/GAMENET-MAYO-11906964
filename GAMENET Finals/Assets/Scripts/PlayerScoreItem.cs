@@ -17,19 +17,12 @@ public class PlayerScoreItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentScore = 0;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
 
-        /*scoreText.text = currentScore.ToString("0");
-
-        if (score > 0)
-        {
-            score = 0;
-        }*/
     }
 }

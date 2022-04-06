@@ -15,6 +15,10 @@ PrefabInstance:
       propertyPath: r
       value: 255
       objectReference: {fileID: 0}
+    - target: {fileID: 2919626566699941463, guid: 7b637313350e5d749a732af614b44dbe, type: 3}
+      propertyPath: playerActorNumber
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5095203627807005313, guid: 7b637313350e5d749a732af614b44dbe, type: 3}
       propertyPath: m_Color.g
       value: 0

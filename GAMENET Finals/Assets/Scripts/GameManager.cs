@@ -13,9 +13,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public GameObject[] playerPrefabs;
     public GameObject[] inGamePanels;
+    public GameObject[] playerScoreItems;
     public GameObject[] playerGO;
     public TextMeshProUGUI playerResult;
     public TextMeshProUGUI playerStanding;
+    public Transform[] spawnPoints;
 
     public static GameManager instance;
 
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
 
-            PhotonNetwork.Instantiate(playerPrefabs[actorNumber - 1].name, SpawnManager.instance.spawnPoints[actorNumber - 1].position, Quaternion.identity);
+            PhotonNetwork.Instantiate(playerPrefabs[actorNumber - 1].name, spawnPoints[actorNumber - 1].position, Quaternion.identity);
         }
 
         inGamePanels[0].SetActive(true);
@@ -81,9 +83,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(1f);
 
+        int i = 0;
+
         foreach (GameObject go in playerGO)
         {
             go.GetComponent<PlayerSetup>().SetPlayerViews();
+            playerScoreItems[i].SetActive(true);
+            i++;
         }
 
         TimerManager.instance.timerActive = true;
@@ -96,7 +102,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         
         foreach (GameObject go in playerGO)
         {
-            go.GetComponent<PlayerStatus>().EvaluateScore();
             ScoreManager.instance.players.Add(go);
         }
 

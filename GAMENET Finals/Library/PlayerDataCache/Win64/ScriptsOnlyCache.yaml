@@ -15,6 +15,7 @@ ScriptsOnlyBuild:
     - PowerUps
     - ScoreManager
     - SpawnManager
+    - Tiles
     - TimerManager
     - UnityEngine.UI.Michsky.UI.Freebie.UIGradient
     PhotonUnityNetworking.Demos.dll:
@@ -37,7 +38,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.U2D.IK.IKEditorManagerHelper
     Unity.2D.Tilemap.Editor.dll:
@@ -60,10 +60,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -177,6 +175,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5816}
     - Class: 114
       Script: {instanceID: 5980}
+    - Class: 114
+      Script: {instanceID: 53054}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -722,7 +722,7 @@ ScriptsOnlyBuild:
     className: IngameControlPanel
   - hash:
       serializedVersion: 2
-      Hash: 9e9751c5b890a36e70d532ca7b47781c
+      Hash: a9a1bac1e0a1f4f60d00d7b32a589fa6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerStatus
@@ -1814,7 +1814,7 @@ ScriptsOnlyBuild:
     className: PlayerScoreItem
   - hash:
       serializedVersion: 2
-      Hash: f8054617d9928320fb03f46329e22073
+      Hash: 165ac53bb3753b1db39d6780afe414f7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SpawnManager
@@ -1862,7 +1862,7 @@ ScriptsOnlyBuild:
     className: PunTurnManager
   - hash:
       serializedVersion: 2
-      Hash: 86a9eefba797c1255510a6af25152b69
+      Hash: f43129532c86cf29cce90e890655e3b9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -2010,6 +2010,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Demos.dll
     namespaceName: Photon.Pun.Demo.Cockpit.Forms
     className: UserIdUiForm
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Tiles
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenuScene.unity

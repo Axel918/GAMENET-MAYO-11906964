@@ -10,15 +10,20 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
     public GameObject[] tiles;
     public GameObject[] statusEffects;
     public int playerScore;
+    private int score;
     public string playerName;
+    private Color playerColor;
+
+    [SerializeField]
     private int playerActorNumber;
+
     public GameObject explosion;
     private int place;
     private string ordinalPlace;
 
     // Power-up booleans
     private bool canKill;
-   
+
     public float r;
     public float g;
     public float b;
@@ -26,9 +31,9 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        playerActorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
         playerName = photonView.Owner.NickName;
         playerScore = 0;
+        playerColor = new Color(r, g, b);
     }
 
     // Update is called once per frame
@@ -47,10 +52,36 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
                 Debug.Log("Color is the same");
                 return;
             }
-            else
+            else if (collider.GetComponent<SpriteRenderer>().color == Color.white)
             {
                 collider.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
+
+                if (photonView.IsMine)
+                {
+                    this.photonView.RPC("IncreaseScore", RpcTarget.AllBuffered);
+                }
+
+                collider.GetComponent<Tiles>().SetPlayerStep(gameObject);
+
                 Debug.Log("New Color");
+            }
+            else
+            {
+                if (photonView.IsMine)
+                {
+                    this.photonView.RPC("IncreaseScore", RpcTarget.AllBuffered);
+                }
+
+                GameObject otherPlayer = collider.GetComponent<Tiles>().GetPlayerStep();
+
+                if (otherPlayer.GetComponent<PhotonView>().IsMine)
+                {
+                    otherPlayer.GetComponent<PhotonView>().RPC("DecreaseScore", RpcTarget.AllBuffered);
+                }
+
+                collider.GetComponent<SpriteRenderer>().color = new Color(r, g, b);
+                collider.GetComponent<Tiles>().SetPlayerStep(gameObject);
+                Debug.Log("Replace Color");
             }
         }
 
@@ -82,6 +113,22 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
 
             Destroy(collider.gameObject);
         }
+    }
+
+    // Increase Player Score
+    [PunRPC]
+    public void IncreaseScore()
+    {
+        this.playerScore++;
+        GameManager.instance.playerScoreItems[playerActorNumber - 1].GetComponent<PlayerScoreItem>().scoreText.text = this.playerScore.ToString();
+    }
+
+    // Decrease Player Score
+    [PunRPC]
+    public void DecreaseScore()
+    {
+        this.playerScore--;
+        GameManager.instance.playerScoreItems[playerActorNumber - 1].GetComponent<PlayerScoreItem>().scoreText.text = this.playerScore.ToString();
     }
 
     [PunRPC]
@@ -180,7 +227,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(2f);
 
-        transform.position = SpawnManager.instance.spawnPoints[playerActorNumber - 1].position;
+        transform.position = GameManager.instance.spawnPoints[playerActorNumber - 1].position;
         GetComponent<PlayerMovement>().enabled = true;
         GetComponent<SpriteRenderer>().color = new Color(r, g, b);
     }
@@ -191,20 +238,6 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
         GetComponent<SpriteRenderer>().color = new Color(0, 0, 0);
         yield return new WaitForSeconds(2f);
         GetComponent<SpriteRenderer>().color = new Color(r, g, b);
-    }
-
-    // Evaluates the Player Score
-    public void EvaluateScore()
-    {
-        tiles = GameObject.FindGameObjectsWithTag("Tile");
-
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            if (tiles[i].GetComponent<SpriteRenderer>().color == new Color(r, g, b))
-            {
-                playerScore++;
-            }
-        }
     }
 
     public void ToOrdinal(int value)
