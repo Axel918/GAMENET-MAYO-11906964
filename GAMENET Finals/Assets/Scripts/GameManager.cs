@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Video;
 using Photon.Pun;
 using Photon.Realtime;
+using ExitGames.Client.Photon;
 using TMPro;
 
 public class GameManager : MonoBehaviourPunCallbacks
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public Transform[] spawnPoints;
 
     public static GameManager instance;
+    public ExitManager exitManager;
 
     // Introductory Countdown
     public int countdownTime;
@@ -50,11 +52,16 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         ActivatePanel(inGamePanels[0]);
 
-        StartCoroutine(CountdownToStart());
+        if (PhotonNetwork.LocalPlayer.IsMasterClient)
+        {
+            exitManager.EventStart();
+        }
     }
 
+   
+
     // Countdown before game begins
-    IEnumerator CountdownToStart()
+    public IEnumerator CountdownToStart()
     {
         yield return new WaitForSeconds(1f);
 
@@ -116,7 +123,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     IEnumerator LeaveTheRoom()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.0f);
         
         PhotonNetwork.LeaveRoom();
     }

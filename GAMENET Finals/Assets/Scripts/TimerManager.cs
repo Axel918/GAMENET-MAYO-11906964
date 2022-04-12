@@ -58,7 +58,7 @@ public class TimerManager : MonoBehaviour
                 StartCoroutine(LastMinute());
             }
 
-            if (currentTime <= 0)
+            if (currentTime <= 0.9f)
             {
                 timerActive = false;
                 StartCoroutine(GameManager.instance.TimeOver());
