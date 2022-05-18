@@ -25,8 +25,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Introductory Countdown
     public int countdownTime;
     public TextMeshProUGUI countdownTimeText;
-
-    public GameObject bgm;
+    
+    // Player's number beased on player list
+    private int number;
 
     private void Awake()
     {
@@ -45,16 +46,26 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+            //int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
 
-            PhotonNetwork.Instantiate(playerPrefabs[actorNumber - 1].name, spawnPoints[actorNumber - 1].position, Quaternion.identity);
-        }
+            for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+            {
+                if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[i])
+                {
+                    number = i;
+                    break;
+                }
+            }
 
-        ActivatePanel(inGamePanels[0]);
+            //PhotonNetwork.Instantiate(playerPrefabs[actorNumber - 1].name, spawnPoints[actorNumber - 1].position, Quaternion.identity);
+            PhotonNetwork.Instantiate(playerPrefabs[number].name, spawnPoints[number].position, Quaternion.identity);
 
-        if (PhotonNetwork.LocalPlayer.IsMasterClient)
-        {
-            exitManager.EventStart();
+            ActivatePanel(inGamePanels[0]);
+
+            if (PhotonNetwork.LocalPlayer.IsMasterClient)
+            {
+                exitManager.EventStart();
+            }
         }
     }
 
@@ -80,7 +91,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(1f);
 
-        bgm.GetComponent<AudioSource>().Play();
+        AudioManager.instance.Play("bgm");
 
         int i = 0;
 
@@ -99,7 +110,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         countdownTimeText.text = "Time's Up!";
         
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
 
         foreach (GameObject go in playerGO)
         {
@@ -116,7 +127,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("LobbyScene");
     }
 
-    public void OnReturnToLobbyButtonClikced()
+    public void OnReturnToLobbyButtonClicked()
     {
         StartCoroutine(LeaveTheRoom());
     }

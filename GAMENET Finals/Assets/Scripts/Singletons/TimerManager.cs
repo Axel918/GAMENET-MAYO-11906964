@@ -22,6 +22,8 @@ public class TimerManager : MonoBehaviour
     public GameObject background;
     public TextMeshProUGUI countdownTimeText;
 
+    private TimeSpan time;
+
     private void Awake()
     {
         if (instance == null)
@@ -40,6 +42,8 @@ public class TimerManager : MonoBehaviour
         currentTime = startMinutes * 60;
         lastMinute = false;
 
+        time = TimeSpan.FromSeconds(currentTime);
+
         foreach (GameObject go in whiteWalls)
         {
             go.GetComponent<LerpColor>().enabled = false;
@@ -52,10 +56,17 @@ public class TimerManager : MonoBehaviour
         if (timerActive == true)
         {
             currentTime -= Time.deltaTime;
+            time = TimeSpan.FromSeconds(currentTime);
 
             if (Mathf.Floor(currentTime) <= 120 && lastMinute == false)
             {
                 StartCoroutine(LastMinute());
+            }
+
+            if (currentTime > 1f && Mathf.Floor(currentTime) <= 10f)
+            {
+                //TimeSpan time1 = TimeSpan.FromSeconds(currentTime);
+                countdownTimeText.text = time.Seconds.ToString("0");
             }
 
             if (currentTime <= 0.9f)
@@ -71,7 +82,7 @@ public class TimerManager : MonoBehaviour
                 }
             }
 
-            TimeSpan time = TimeSpan.FromSeconds(currentTime);
+            //TimeSpan time = TimeSpan.FromSeconds(currentTime);
             currentTimeText.text = time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
         }
     }
@@ -85,14 +96,14 @@ public class TimerManager : MonoBehaviour
     {
         countdownTimeText.text = "LAST 2 MINUTES!";
 
-        GameManager.instance.bgm.GetComponent<AudioSource>().Stop();
-        GameManager.instance.bgm.GetComponent<AudioSource>().pitch = 1.25f;
-        GameManager.instance.bgm.GetComponent<AudioSource>().Play();
+        AudioManager.instance.Stop("bgm");
+        AudioManager.instance.ModifyPitch("bgm", 1.25f);
+        AudioManager.instance.Play("bgm");
 
         yield return new WaitForSeconds(1.5f);
 
         countdownTimeText.text = "";
-        background.GetComponent<VideoPlayer>().playbackSpeed = 8;
+        //background.GetComponent<VideoPlayer>().playbackSpeed = 8;
 
         foreach (GameObject go in whiteWalls)
         {

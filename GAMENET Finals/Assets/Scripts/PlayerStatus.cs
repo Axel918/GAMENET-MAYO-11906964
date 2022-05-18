@@ -85,6 +85,11 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
             Debug.Log("You hit an enemy");
             photonView.RPC("KillOpposingPlayer", RpcTarget.AllBuffered);
             collider.gameObject.GetComponent<PhotonView>().RPC("PlayerKilled", RpcTarget.AllBuffered);
+
+            if (photonView.IsMine)
+            {
+                AudioManager.instance.Play("explode");
+            }
         }
 
         // If player picks up an power-up
@@ -107,7 +112,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
 
             if (photonView.IsMine)
             {
-                AudioManager.instance.powerUp.Play();
+                AudioManager.instance.Play("powerUp");
             }
             
             Destroy(collider.gameObject);

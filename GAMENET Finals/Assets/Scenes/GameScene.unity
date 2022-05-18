@@ -3395,7 +3395,6 @@ GameObject:
   m_Component:
   - component: {fileID: 925226769}
   - component: {fileID: 925226768}
-  - component: {fileID: 925226771}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -3415,7 +3414,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b77e810061f0ec9428022d51918acc1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUp: {fileID: 925226771}
+  sounds:
+  - name: powerUp
+    clip: {fileID: 8300000, guid: 8b2b70458513f7843989745770b08bf0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: explode
+    clip: {fileID: 8300000, guid: d064933dd518042438d6c57897503cdc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: bgm
+    clip: {fileID: 8300000, guid: a1d495b2ff2815e4d93c54fbd43217b7, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!4 &925226769
 Transform:
   m_ObjectHideFlags: 0
@@ -3430,102 +3447,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &925226771
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925226767}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8b2b70458513f7843989745770b08bf0, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &940809439
 GameObject:
   m_ObjectHideFlags: 0
@@ -5637,7 +5558,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1349561174}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnReturnToLobbyButtonClikced
+        m_MethodName: OnReturnToLobbyButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5834,7 +5755,6 @@ MonoBehaviour:
   exitManager: {fileID: 473935110}
   countdownTime: 3
   countdownTimeText: {fileID: 810029160}
-  bgm: {fileID: 299193246}
 --- !u!1 &1386258804
 GameObject:
   m_ObjectHideFlags: 0
@@ -15082,7 +15002,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -20
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -15099,7 +15019,7 @@ VideoPlayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4759882882588550263}
-  m_Enabled: 1
+  m_Enabled: 0
   m_VideoClip: {fileID: 32900000, guid: 7eb8c81390892254d89a12b512d84c8c, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
