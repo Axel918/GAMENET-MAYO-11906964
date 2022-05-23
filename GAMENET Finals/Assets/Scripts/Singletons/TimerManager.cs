@@ -19,7 +19,6 @@ public class TimerManager : MonoBehaviour
     public bool timerActive;
     private bool lastMinute;
 
-    public GameObject background;
     public TextMeshProUGUI countdownTimeText;
 
     private TimeSpan time;
@@ -61,11 +60,15 @@ public class TimerManager : MonoBehaviour
             if (Mathf.Floor(currentTime) <= 120 && lastMinute == false)
             {
                 StartCoroutine(LastMinute());
+
+                // Modify Pitch of the BGM
+                AudioManager.instance.Stop("bgm");
+                AudioManager.instance.ModifyPitch("bgm", 1.25f);
+                AudioManager.instance.Play("bgm");
             }
 
             if (currentTime > 1f && Mathf.Floor(currentTime) <= 10f)
             {
-                //TimeSpan time1 = TimeSpan.FromSeconds(currentTime);
                 countdownTimeText.text = time.Seconds.ToString("0");
             }
 
@@ -82,34 +85,30 @@ public class TimerManager : MonoBehaviour
                 }
             }
 
-            //TimeSpan time = TimeSpan.FromSeconds(currentTime);
             currentTimeText.text = time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
         }
     }
 
+    // Get Current Time
     public float GetCurrentTime()
     {
         return currentTime;
     }
 
+    // Indicate last 2 minutes
     IEnumerator LastMinute()
     {
         countdownTimeText.text = "LAST 2 MINUTES!";
 
-        AudioManager.instance.Stop("bgm");
-        AudioManager.instance.ModifyPitch("bgm", 1.25f);
-        AudioManager.instance.Play("bgm");
+        lastMinute = true;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);        
 
         countdownTimeText.text = "";
-        //background.GetComponent<VideoPlayer>().playbackSpeed = 8;
 
         foreach (GameObject go in whiteWalls)
         {
             go.GetComponent<LerpColor>().enabled = true;
         }
-
-        lastMinute = true;
     }
 }

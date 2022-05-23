@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager instance;
     public ExitManager exitManager;
 
-    // Introductory Countdown
+    // Introductory Countdown Variables
     public int countdownTime;
     public TextMeshProUGUI countdownTimeText;
     
@@ -46,8 +46,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsConnectedAndReady)
         {
-            //int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-
             for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
             {
                 if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[i])
@@ -57,7 +55,6 @@ public class GameManager : MonoBehaviourPunCallbacks
                 }
             }
 
-            //PhotonNetwork.Instantiate(playerPrefabs[actorNumber - 1].name, spawnPoints[actorNumber - 1].position, Quaternion.identity);
             PhotonNetwork.Instantiate(playerPrefabs[number].name, spawnPoints[number].position, Quaternion.identity);
 
             ActivatePanel(inGamePanels[0]);
@@ -68,8 +65,6 @@ public class GameManager : MonoBehaviourPunCallbacks
             }
         }
     }
-
-   
 
     // Countdown before game begins
     public IEnumerator CountdownToStart()
@@ -108,37 +103,43 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public IEnumerator TimeOver()
     {
+        // Declare Time Over
         countdownTimeText.text = "Time's Up!";
         
         yield return new WaitForSeconds(2.0f);
 
+        // Add all players to the Sorting List
         foreach (GameObject go in playerGO)
         {
             ScoreManager.instance.players.Add(go);
         }
 
+        // Sort player scores
         ScoreManager.instance.SortScore();
 
         countdownTimeText.text = "";
         ActivatePanel(inGamePanels[1]);
     }
-    public override void OnLeftRoom()
-    {
-        SceneManager.LoadScene("LobbyScene");
-    }
 
+    // Return to Lobby Button Clicked
     public void OnReturnToLobbyButtonClicked()
     {
         StartCoroutine(LeaveTheRoom());
     }
 
+    // Leave the Game Scene and Return to Lobby
     IEnumerator LeaveTheRoom()
     {
         yield return new WaitForSeconds(0.0f);
         
         PhotonNetwork.LeaveRoom();
     }
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene("LobbyScene");
+    }
 
+    // Game Scene Panel Manager
     public void ActivatePanel(GameObject chosenPanel)
     {
         inGamePanels[0].SetActive(chosenPanel.Equals(inGamePanels[0]));

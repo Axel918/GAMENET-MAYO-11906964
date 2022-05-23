@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // Play Audio
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -43,6 +44,7 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    // Stop Audio
     public void Stop(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
@@ -55,6 +57,7 @@ public class AudioManager : MonoBehaviour
         s.source.Stop();
     }
 
+    // Modify Audio Pitch
     public void ModifyPitch(string name, float amount)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
