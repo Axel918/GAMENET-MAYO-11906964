@@ -27,6 +27,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         animator.enabled = false;
         playerMovement.enabled = false;
         camera.GetComponent<Camera>().enabled = photonView.IsMine;
+        camera.GetComponent<AudioListener>().enabled = photonView.IsMine;
 
         // Set player name
         playerNameText.text = photonView.Owner.NickName;

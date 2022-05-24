@@ -1667,7 +1667,7 @@ MonoBehaviour:
   - {fileID: 785022799}
   - {fileID: 1469564343}
   - {fileID: 2033372720}
-  startMinutes: 3
+  startMinutes: 5
   currentTimeText: {fileID: 1650999590}
   timerActive: 0
   countdownTimeText: {fileID: 810029160}
