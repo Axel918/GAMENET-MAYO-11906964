@@ -8,7 +8,7 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviourPunCallbacks
 {
-    public static ScoreManager instance;
+    public static ScoreManager Instance;
 
     public TextMeshProUGUI[] playerRankText;
     
@@ -17,13 +17,13 @@ public class ScoreManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(this.gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
         }
     }
 

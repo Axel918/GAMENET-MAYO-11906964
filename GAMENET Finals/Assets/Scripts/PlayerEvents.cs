@@ -34,7 +34,7 @@ public class PlayerEvents : MonoBehaviourPunCallbacks
 
             int viewId = (int)data[0];
 
-            TextMeshProUGUI playerResultText = GameManager.instance.playerResult;
+            TextMeshProUGUI playerResultText = GameManager.Instance.playerResult;
 
             if (viewId == photonView.ViewID)    // This is you!
             {

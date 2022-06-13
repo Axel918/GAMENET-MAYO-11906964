@@ -7,7 +7,7 @@ using ExitGames.Client.Photon;
 
 public class SpawnManager : MonoBehaviourPunCallbacks
 {
-    public static SpawnManager instance;
+    public static SpawnManager Instance;
 
     public float minX;
     public float maxX;
@@ -58,7 +58,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (TimerManager.instance.timerActive == true)
+        if (TimerManager.Instance.timerActive == true)
         {
             currentTime -= Time.deltaTime;
 

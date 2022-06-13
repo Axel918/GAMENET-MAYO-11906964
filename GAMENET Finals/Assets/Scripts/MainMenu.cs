@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Main Menu Panels")]
-    public GameObject mainMenuPanel;
-    public GameObject tutorialPanel;
-    public GameObject creditsPanel;
-
     [Header("Tutorial Panels")]
     public GameObject[] tutorialPages;
 
@@ -22,38 +17,36 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        ActivatePanel(mainMenuPanel);
+        PanelManager.Instance.ActivatePanel("Main Menu");
+        AudioManager.Instance.Play("MainMenuMusic");
         tutorialPageNumber = 0;
         creditsPageNumber = 0;
     }
 
     public void OnPlayButtonClicked()
     {
-        Debug.Log("Play");
-        SceneManager.LoadScene("LobbyScene");
+        StartCoroutine(AsyncLoadScene("LobbyScene"));
     }
 
     public void OnTutorialButtonClicked()
     {
-        Debug.Log("Tutorial");
-        ActivatePanel(tutorialPanel);
+        PanelManager.Instance.ActivatePanel("Tutorial");
     }
 
     public void OnTutorialReturnButtonClicked()
     {
-        ActivatePanel(mainMenuPanel);
+        PanelManager.Instance.ActivatePanel("Main Menu");
         TutorialPanel(tutorialPages[0]);
     }
 
     public void OnCreditsButtonClicked()
     {
-        Debug.Log("Credits");
-        ActivatePanel(creditsPanel);
+        PanelManager.Instance.ActivatePanel("Credits");
     }
 
     public void OnCreditsReturnButtonClicked()
     {
-        ActivatePanel(mainMenuPanel);
+        PanelManager.Instance.ActivatePanel("Main Menu");
         CreditsPanel(creditsPages[0]);
     }
 
@@ -61,13 +54,6 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("You Quit the Game!");
         Application.Quit();
-    }
-
-    public void ActivatePanel(GameObject chosenPanel)
-    {
-        mainMenuPanel.SetActive(chosenPanel.Equals(mainMenuPanel));
-        tutorialPanel.SetActive(chosenPanel.Equals(tutorialPanel));
-        creditsPanel.SetActive(chosenPanel.Equals(creditsPanel));
     }
 
     public void TutorialPanel(GameObject chosenPanel)
@@ -130,5 +116,25 @@ public class MainMenu : MonoBehaviour
         }
 
         CreditsPanel(creditsPages[creditsPageNumber]);
+    }
+
+    IEnumerator AsyncLoadScene(string name)
+    {
+        AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(name);
+
+        // Activate Loading Panel
+        PanelManager.Instance.ActivatePanel("LoadingPanel");
+
+        while (!asyncLoadScene.isDone)
+        {
+            // Loading bar
+            float loadProgress = Mathf.Clamp01(asyncLoadScene.progress / .9f);
+
+            Debug.Log("Loading Progress: " + loadProgress);
+
+            yield return null;
+        }
+
+        Debug.Log("Loading Complete");
     }
 }
