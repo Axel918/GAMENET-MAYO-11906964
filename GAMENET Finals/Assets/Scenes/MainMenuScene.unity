@@ -2362,15 +2362,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key1.b
-      value: 0.5764706
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key1.g
-      value: 0.5764706
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key1.r
-      value: 0.5764706
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5566328818500905717, guid: 21c3a700d1a35b349be2c33aad64f762, type: 3}
       propertyPath: _effectGradient.key2.b
