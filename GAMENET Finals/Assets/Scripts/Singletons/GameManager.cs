@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public TextMeshProUGUI playerStanding;
     public Transform[] spawnPoints;
 
-    public static GameManager Instance;
+    public static GameManager instance;
     public ExitManager exitManager;
 
     // Introductory Countdown Variables
@@ -31,11 +31,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
-        else if (Instance != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(1f);
 
-        AudioManager.Instance.Play("bgm");
+        AudioManager.instance.Play("bgm");
 
         int i = 0;
 
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             i++;
         }
 
-        TimerManager.Instance.timerActive = true;
+        TimerManager.instance.timerActive = true;
         countdownTimeText.text = "";
     }
 
@@ -111,11 +111,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         // Add all players to the Sorting List
         foreach (GameObject go in playerGO)
         {
-            ScoreManager.Instance.players.Add(go);
+            ScoreManager.instance.players.Add(go);
         }
 
         // Sort player scores
-        ScoreManager.Instance.SortScore();
+        ScoreManager.instance.SortScore();
 
         countdownTimeText.text = "";
         ActivatePanel(inGamePanels[1]);

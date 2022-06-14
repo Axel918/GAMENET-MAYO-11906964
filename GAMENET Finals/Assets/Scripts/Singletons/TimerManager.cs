@@ -8,7 +8,7 @@ using System;
 
 public class TimerManager : MonoBehaviour
 {
-    public static TimerManager Instance;
+    public static TimerManager instance;
 
     public GameObject[] whiteWalls;
 
@@ -25,11 +25,11 @@ public class TimerManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
-        else if (Instance != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -62,9 +62,9 @@ public class TimerManager : MonoBehaviour
                 StartCoroutine(LastMinute());
 
                 // Modify Pitch of the BGM
-                AudioManager.Instance.Stop("bgm");
-                AudioManager.Instance.ModifyPitch("bgm", 1.25f);
-                AudioManager.Instance.Play("bgm");
+                AudioManager.instance.Stop("bgm");
+                AudioManager.instance.ModifyPitch("bgm", 1.25f);
+                AudioManager.instance.Play("bgm");
             }
 
             if (currentTime > 1f && Mathf.Floor(currentTime) <= 10f)
@@ -75,10 +75,10 @@ public class TimerManager : MonoBehaviour
             if (currentTime <= 0.9f)
             {
                 timerActive = false;
-                StartCoroutine(GameManager.Instance.TimeOver());
+                StartCoroutine(GameManager.instance.TimeOver());
                 Debug.Log("Time Over");
 
-                foreach (GameObject go in GameManager.Instance.playerGO)
+                foreach (GameObject go in GameManager.instance.playerGO)
                 {
                     go.GetComponent<PlayerSetup>().GetAnimator().enabled = false;
                     go.GetComponent<PlayerSetup>().GetPlayerMovement().enabled = false;

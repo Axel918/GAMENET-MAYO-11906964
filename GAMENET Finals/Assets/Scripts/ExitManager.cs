@@ -28,7 +28,7 @@ public class ExitManager : MonoBehaviourPunCallbacks
         {
             object[] data = (object[])photonEvent.CustomData;
 
-            StartCoroutine(GameManager.Instance.CountdownToStart());
+            StartCoroutine(GameManager.instance.CountdownToStart());
         }
     }
 

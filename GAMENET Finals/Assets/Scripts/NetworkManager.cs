@@ -9,19 +9,37 @@ using TMPro;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    // Public Variables
+    [Header("Login UI")]
+    public GameObject LoginUIPanel;
     public TMP_InputField PlayerNameInput;
-    public TMP_InputField RoomNameInputField;
+
+    [Header("Connecting Info Panel")]
+    public GameObject ConnectingInfoUIPanel;
+
+    [Header("GameOptions  Panel")]
+    public GameObject GameOptionsUIPanel;
+
+    [Header("Create Room Panel")]
+    public GameObject CreateRoomUIPanel;
+    public GameObject CreateUIPanel;
+    public TMP_InputField roomNameInputField;
+    private int maxPlayers;
+
+    [Header("Show Room List Panel")]
+    public GameObject ShowRoomListUIPanel;
     public GameObject RoomListItemPrefab;
-    public GameObject RoomListParent;
+    public GameObject roomListParent;
+
+    [Header("Inside Room Panel")]
+    public GameObject InsideRoomUIPanel;
     public TextMeshProUGUI RoomNameText;
     public TextMeshProUGUI PlayerCountText;
     public GameObject PlayerListPrefab;
     public GameObject PlayerListParent;
     public GameObject StartGameButton;
 
-    // Private Variables
-    private int maxPlayers;
+
+    
     private Dictionary<string, RoomInfo> cachedRoomList;
     private Dictionary<string, GameObject> roomListGameObjects;
     private Dictionary<int, GameObject> playerListGameObjects;
@@ -30,13 +48,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.Instance.Play("LobbyMusic");
-        PanelManager.Instance.ActivatePanel("LoginPanel");
+        ActivatePanel(LoginUIPanel);
         PhotonNetwork.AutomaticallySyncScene = true;
         PlayerNameInput.characterLimit = 10;
-        RoomNameInputField.characterLimit = 20;
+        roomNameInputField.characterLimit = 20;
         cachedRoomList = new Dictionary<string, RoomInfo>();
         roomListGameObjects = new Dictionary<string, GameObject>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
     #endregion
 
@@ -47,7 +70,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if (!string.IsNullOrEmpty(playerName))
         {
-            PanelManager.Instance.ActivatePanel("ConnectingPanel");
+            ActivatePanel(ConnectingInfoUIPanel);
 
             if (!PhotonNetwork.IsConnected)
             {
@@ -63,26 +86,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void OnReturnButtonClicked()
     {
-        StartCoroutine(AsyncLoadScene("MainMenuScene"));
+        SceneManager.LoadScene("MainMenuScene");
     }
 
     public void OnCreateRoomButtonClicked()
     {
-        PanelManager.Instance.ActivatePanel("CreateRoomPanel");
+        ActivatePanel(CreateRoomUIPanel);
     }
 
     public void OnCancelButtonClicked()
     {
-        PanelManager.Instance.ActivatePanel("GameOptionsPanel");
+        ActivatePanel(GameOptionsUIPanel);
     }
 
     public void OnCreateButtonClicked()
     {
         if (maxPlayers != 0)
         {
-            PanelManager.Instance.ActivatePanel("CreatingPanel");
+            ActivatePanel(CreateUIPanel);
 
-            string roomName = RoomNameInputField.text;
+            string roomName = roomNameInputField.text;
 
             if (string.IsNullOrEmpty(roomName))
             {
@@ -112,8 +135,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.JoinLobby();
         }
-
-        PanelManager.Instance.ActivatePanel("ShowRoomListPanel");
+        
+        ActivatePanel(ShowRoomListUIPanel);
     }
 
     public void OnBackButtonClicked()
@@ -123,13 +146,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LeaveLobby();
         }
 
-        PanelManager.Instance.ActivatePanel("GameOptionsPanel");
+        ActivatePanel(GameOptionsUIPanel);
     }
 
     public void OnLogoutButtonClicked()
     {
         PhotonNetwork.Disconnect();
-        PanelManager.Instance.ActivatePanel("LoginPanel");
+        ActivatePanel(LoginUIPanel);
     }
 
     public void OnStartGameButtonClicked()
@@ -147,7 +170,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " is connected to Photon");
-        PanelManager.Instance.ActivatePanel("GameOptionsPanel");
+        ActivatePanel(GameOptionsUIPanel);
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -164,7 +187,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.LocalPlayer.NickName + " has joined " + PhotonNetwork.CurrentRoom.Name);
         Debug.Log("Player count: " + PhotonNetwork.CurrentRoom.PlayerCount);
-        PanelManager.Instance.ActivatePanel("InsideRoomPanel");
+        ActivatePanel(InsideRoomUIPanel);
 
         RoomNameText.text = PhotonNetwork.CurrentRoom.Name;
         PlayerCountText.text = "Players: " + PhotonNetwork.CurrentRoom.PlayerCount + " / " + PhotonNetwork.CurrentRoom.MaxPlayers;
@@ -227,7 +250,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         foreach(RoomInfo info in cachedRoomList.Values)
         {
             GameObject listItem = Instantiate(RoomListItemPrefab);
-            listItem.transform.SetParent(RoomListParent.transform);
+            listItem.transform.SetParent(roomListParent.transform);
             listItem.transform.localScale = Vector3.one;
 
             listItem.transform.Find("RoomNameText").GetComponent<TextMeshProUGUI>().text = info.Name;
@@ -279,7 +302,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         playerListGameObjects.Clear();
         playerListGameObjects = null;
 
-        PanelManager.Instance.ActivatePanel("GameOptionsPanel");
+        ActivatePanel(GameOptionsUIPanel);
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
@@ -309,6 +332,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region Public Methods
+    public void ActivatePanel(GameObject chosenPanel)
+    {
+        LoginUIPanel.SetActive(chosenPanel.Equals(LoginUIPanel));
+        ConnectingInfoUIPanel.SetActive(chosenPanel.Equals(ConnectingInfoUIPanel));
+        GameOptionsUIPanel.SetActive(chosenPanel.Equals(GameOptionsUIPanel));
+        CreateRoomUIPanel.SetActive(chosenPanel.Equals(CreateRoomUIPanel));
+        CreateUIPanel.SetActive(chosenPanel.Equals(CreateUIPanel));
+        ShowRoomListUIPanel.SetActive(chosenPanel.Equals(ShowRoomListUIPanel));
+        InsideRoomUIPanel.SetActive(chosenPanel.Equals(InsideRoomUIPanel));
+
+    }
+
     public void SetMaxPlayers(int _maxPlayers)
     {
         if(this.maxPlayers == _maxPlayers)
@@ -368,26 +403,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
 
         return true;
-    }
-
-    IEnumerator AsyncLoadScene(string name)
-    {
-        AsyncOperation asyncLoadScene = SceneManager.LoadSceneAsync(name);
-
-        // Activate Loading Panel
-        PanelManager.Instance.ActivatePanel("LoadingPanel");
-
-        while (!asyncLoadScene.isDone)
-        {
-            // Loading bar
-            float loadProgress = Mathf.Clamp01(asyncLoadScene.progress / .9f);
-
-            Debug.Log("Loading Progress: " + loadProgress);
-
-            yield return null;
-        }
-
-        Debug.Log("Loading Complete");
     }
     #endregion
 }

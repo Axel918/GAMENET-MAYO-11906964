@@ -88,7 +88,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
 
             if (photonView.IsMine)
             {
-                AudioManager.Instance.Play("explode");
+                AudioManager.instance.Play("explode");
             }
         }
 
@@ -112,7 +112,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
 
             if (photonView.IsMine)
             {
-                AudioManager.Instance.Play("powerUp");
+                AudioManager.instance.Play("powerUp");
             }
             
             Destroy(collider.gameObject);
@@ -124,7 +124,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
     public void IncreaseScore()
     {
         this.playerScore++;
-        GameManager.Instance.playerScoreItems[playerActorNumber - 1].GetComponent<PlayerScoreItem>().scoreText.text = this.playerScore.ToString();
+        GameManager.instance.playerScoreItems[playerActorNumber - 1].GetComponent<PlayerScoreItem>().scoreText.text = this.playerScore.ToString();
     }
 
     // Decrease Player Score
@@ -138,7 +138,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
             this.playerScore = 0;
         }
 
-        GameManager.Instance.playerScoreItems[playerActorNumber - 1].GetComponent<PlayerScoreItem>().scoreText.text = this.playerScore.ToString();
+        GameManager.instance.playerScoreItems[playerActorNumber - 1].GetComponent<PlayerScoreItem>().scoreText.text = this.playerScore.ToString();
     }
 
     [PunRPC]
@@ -150,7 +150,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SlowDown()
     {
-        foreach (GameObject go in GameManager.Instance.playerGO)
+        foreach (GameObject go in GameManager.instance.playerGO)
         {
             if (this.gameObject != go)
             {
@@ -213,7 +213,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(5f);
 
-        foreach (GameObject go in GameManager.Instance.playerGO)
+        foreach (GameObject go in GameManager.instance.playerGO)
         {
             if (this.gameObject != go)
             {
@@ -237,7 +237,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(2f);
 
-        transform.position = GameManager.Instance.spawnPoints[playerActorNumber - 1].position;
+        transform.position = GameManager.instance.spawnPoints[playerActorNumber - 1].position;
         GetComponent<PlayerMovement>().enabled = true;
         GetComponent<SpriteRenderer>().color = new Color(r, g, b);
     }
@@ -281,7 +281,7 @@ public class PlayerStatus : MonoBehaviourPunCallbacks
 
     public void ShowPlayerRank()
     {
-        TextMeshProUGUI playerStandingText = GameManager.Instance.playerStanding;
+        TextMeshProUGUI playerStandingText = GameManager.instance.playerStanding;
 
         if (photonView.IsMine)
         {
